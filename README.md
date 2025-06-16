@@ -19,21 +19,19 @@ Welcome! Have you ever wondered if you're getting your money's worth from your p
 
 The app then calculates and compares price-per-area values for each pizza, showing you exactly which one delivers more pizza per money with percentages. It also visually scales the pizzas to show their size difference.
 
-#### Example:
+### Example:
 
 <table>
-<tbody>
 <tr>
-<td>Empty UI in dark mode</td>
-<td>UI with 3 inputs, suggesting the 4th</td>
-<td>UI with complete data, comparing the value</td>
+<td width="25%">Empty UI in dark mode</td>
+<td width="25%">UI with 3 inputs, suggesting the 4th</td>
+<td width="25%">UI with complete data, comparing the value</td>
 </tr>
 <tr>
 <td><img src="Images/EmptyUI.png" alt="empty ui"></td>
 <td><img src="Images/EstimationExample.png" alt="estimation example"></td>
 <td><img src="Images/ValueComparison.png" alt="value comparison"></td>
 </tr>
-</tbody>
 </table>
 
 ---
