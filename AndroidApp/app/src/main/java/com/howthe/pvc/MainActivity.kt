@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2025 OzzyBozy
+ * Custom Non‑Commercial Open Source License — see LICENSE.txt
+ */
+
 package com.howthe.pvc
 
 import android.os.Bundle
