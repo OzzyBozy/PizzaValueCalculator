@@ -7,6 +7,7 @@ Welcome! Have you ever wondered if you're getting your money's worth from your p
 * [`AndroidApp`](AndroidApp) contains all the necessary project files for the Android application
 * [`Images`](Images) includes screenshots and other media of the app
 * [`LICENSE`](LICENSE.txt) entails the properties of this projects license
+* [`Releases`](https://github.com/OzzyBozy/PizzaValueCalculator/releases) contains the files for downloading the app
 
 ---
 
@@ -16,7 +17,24 @@ Welcome! Have you ever wondered if you're getting your money's worth from your p
 - Pizza prices
 - (Optionally) Fractional sizes for more advanced comparisons
 
-The app then calculates and compares price-per-area values for each pizza, showing you exactly which one delivers more pizza per money with percentages.
+The app then calculates and compares price-per-area values for each pizza, showing you exactly which one delivers more pizza per money with percentages. It also visually scales the pizzas to show their size difference.
+
+#### Example:
+
+<table>
+<tbody>
+<tr>
+<td>Empty UI in dark mode</td>
+<td>UI with 3 inputs, suggesting the 4th</td>
+<td>UI with complete data, comparing the value</td>
+</tr>
+<tr>
+<td><img src="Images/EmptyUI.png" alt="empty ui"></td>
+<td><img src="Images/EstimationExample.png" alt="estimation example"></td>
+<td><img src="Images/ValueComparison.png" alt="value comparison"></td>
+</tr>
+</tbody>
+</table>
 
 ---
 
