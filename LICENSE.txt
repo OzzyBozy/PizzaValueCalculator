@@ -1,0 +1,37 @@
+Pizza Value Calculator  
+Copyright (c) 2025 OzzyBozy
+
+License: Custom Non-Commercial Open Source License (based on CC BY-NC 4.0)
+
+Preamble:
+This software project is distributed to promote learning, open collaboration, and personal use. The author retains full rights to the intellectual property and prohibits any unauthorized commercial use.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, merge, publish, and distribute the Software for personal, educational, and non-commercial purposes, subject to the following conditions:
+
+1. Attribution:
+   - You must give appropriate credit to the original author ("OzzyBozy").
+   - Include a copy of this license in any distribution or derivative work.
+   - Provide a link to the original repository: https://github.com/OzzyBozy/PizzaValueCalculator
+
+2. Non-Commercial Use:
+   - Commercial use of the Software is strictly prohibited without prior written consent from the author.
+   - Commercial use includes but is not limited to: selling the Software, using the Software as part of a commercial product or service, monetization through ads, paywalls, or subscriptions.
+
+3. Derivative Works:
+   - You may modify or build upon this Software for personal or educational purposes.
+   - Any derivative works must also clearly attribute the original author.
+   - You may not distribute derivative works for commercial purposes without written permission.
+
+4. No Warranty:
+   - This Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, or noninfringement.
+
+5. Liability:
+   - In no event shall the author be liable for any claim, damages, or other liability arising from the use of this Software.
+
+6. Contact:
+   - For commercial licensing or other inquiries, contact: sari.isil@gmail.com
+
+By using or distributing this Software, you agree to be bound by the terms of this license.
+
+---  
+Date: June 2025
