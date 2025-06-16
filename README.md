@@ -21,14 +21,15 @@ The app then calculates and compares price-per-area values for each pizza, showi
 ---
 
 ## How to Build
-| Build in Android Studio | Download APK (currently unavailable) |
-| --- | --- |
-|Clone the repository: ```git clone https://github.com/OzzyBozy/PizzaValueCalculator.git``` | x |
-| Open the project in **Android Studio**. | x |
-| Let Gradle sync and resolve dependencies automatically. | x |
-| Click ▶️ to build and run either on your device or emulator. |
 
-Done, now you have either set up the project in Android Studio or downloaded the apk file directly.
+| Build in Android Studio | Download APK for Android |
+| --- | --- |
+| Clone the repository: `git clone https://github.com/OzzyBozy/PizzaValueCalculator.git` | Download the `PVC-0.1.0-alpha.apk` file from the [Releases](https://github.com/OzzyBozy/PizzaValueCalculator/releases) page. |
+| Open the project in **Android Studio**. | Transfer or download the APK to your Android device via the link. |
+| Let Gradle sync and resolve dependencies automatically. | Ensure that your device allows installation from unknown sources (Settings → Security → Unknown sources). |
+| Click ▶️ to build and run either on your device or emulator. | Open the APK file to install the app. |
+
+Done! Now you have either set up the project in Android Studio or installed the APK directly on your device.
 
 ---
 
