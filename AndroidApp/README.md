@@ -31,17 +31,17 @@ AndroidApp/
 
 ## Key Files
 
-- [`MainActivity.kt`](AndroidApp/app/src/main/java/com/howthe/pvc/MainActivity.kt)  
+- [`MainActivity.kt`](app/src/main/java/com/howthe/pvc/MainActivity.kt)  
   The core activity where all logic and UI interaction begins.
 
-- [`activity_main.xml(vertical)`](AndroidApp/app/src/main/res/layout/activity_main.xml) 
-  [`activity_main.xml(horizontal)`](AndroidApp/app/src/main/res/layout-land/activity_main.xml)  
+- [`activity_main.xml(vertical)`](app/src/main/res/layout/activity_main.xml) 
+  [`activity_main.xml(horizontal)`](app/src/main/res/layout-land/activity_main.xml)  
   Describes the user interface layout of the main screen.
 
-- [`pizza_vector.xml`](AndroidApp/app/src/main/res/drawable/pizza_shape.xml)  
+- [`pizza_vector.xml`](app/src/main/res/drawable/pizza_shape.xml)  
   Vector graphic of the pizza icon used in the interface and logo.
 
-- [`build.gradle (:app)`](AndroidApp/app/build.gradle.kts)  
+- [`build.gradle (:app)`](app/build.gradle.kts)  
   App-level build configuration including dependencies and SDK settings.
 
 ---
