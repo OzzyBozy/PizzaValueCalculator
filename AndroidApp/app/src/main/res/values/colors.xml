@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background">#debe8e</color>
+    <color name="redbanner">#de542a</color>
+    <color name="whitebanner">#fff7e1</color>
+    <color name="wood">#c0884e</color>
+    <color name="boxin">#d09b65</color>
+    <color name="text">#4c2b09</color>
+    <color name="backgroundN">#31081f</color>
+    <color name="redbannerN">#b73008</color>
+    <color name="whitebannerN">#f9edc7</color>
+    <color name="boxinN">#280719</color>
+    <color name="boxoutN">#3a0b25</color>
 </resources>

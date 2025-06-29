@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2025 OzzyBozy
+ * Custom Non‑Commercial Open Source License — see LICENSE.txt
+ */
+
 package com.howthe.pvc
 
 import android.os.Bundle
@@ -21,11 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.switchAdvanced.setOnCheckedChangeListener { _, isChecked ->
-            advancedMode = isChecked
-            toggleAdvancedMode(isChecked)
-            recalculate()
-        }
 
         val priceInputs = listOf(binding.inputPriceA, binding.inputPriceB)
         val sizeInputs = listOf(binding.inputSizeA, binding.inputSizeB)
@@ -48,42 +48,20 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        // Fraction inputs
-        listOf(binding.inputFractionA, binding.inputFractionB).forEach { editText ->
-            editText.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    if (isUpdatingProgrammatically) return
-                    recalculate()
-                }
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
-        }
-
-        binding.radioRadius.setOnCheckedChangeListener { _, _ -> recalculate() }
-
-        toggleAdvancedMode(advancedMode)
     }
-
-    private fun toggleAdvancedMode(enabled: Boolean) {
-        binding.layoutAdvanced.visibility = if (enabled) View.VISIBLE else View.GONE
-    }
-
+    val isRadius = true
     private fun recalculate() {
         if (isUpdatingProgrammatically) return
         isUpdatingProgrammatically = true
 
-        val isRadius = binding.radioRadius.isChecked
 
         val sizeA = binding.inputSizeA.text.toString().toDoubleOrNull()
         val priceA = binding.inputPriceA.text.toString().toDoubleOrNull()
         val sizeB = binding.inputSizeB.text.toString().toDoubleOrNull()
         val priceB = binding.inputPriceB.text.toString().toDoubleOrNull()
-        val fractionA = if (advancedMode) binding.inputFractionA.text.toString().toDoubleOrNull() ?: 1.0 else 1.0
-        val fractionB = if (advancedMode) binding.inputFractionB.text.toString().toDoubleOrNull() ?: 1.0 else 1.0
 
-        val areaA = sizeA?.let { computeArea(it, isRadius) }?.times(fractionA)
-        val areaB = sizeB?.let { computeArea(it, isRadius) }?.times(fractionB)
+        val areaA = sizeA?.let { computeArea(it, isRadius) }
+        val areaB = sizeB?.let { computeArea(it, isRadius) }
 
         val valueA = if (areaA != null && priceA != null) priceA / areaA else null
         val valueB = if (areaB != null && priceB != null) priceB / areaB else null

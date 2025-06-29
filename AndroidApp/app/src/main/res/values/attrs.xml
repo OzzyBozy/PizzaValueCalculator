@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="pvcPizzaBorder" format="reference|color" />
+    <attr name="pvcPizzaFill" format="reference|color" />
+    <attr name="pvcBackground" format="reference|color" />
+    <attr name="pvcRedBanner" format="reference|color" />
+    <attr name="pvcWhiteBanner" format="reference|color" />
+    <attr name="pvcBoxFill" format="reference|color" />
+    <attr name="pvcBoxBorder" format="reference|color" />
+    <attr name="pvcText" format="reference|color" />
+    <attr name="pvcTextBorder" format="reference|color" />
+    <attr name="pvcWood" format="reference|color" />
+    <attr name="pvcBoxText" format="reference|color" />
+
+</resources>
