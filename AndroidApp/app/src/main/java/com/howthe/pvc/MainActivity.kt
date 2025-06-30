@@ -18,7 +18,6 @@ import kotlin.math.sqrt
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var advancedMode = false
     private var isUpdatingProgrammatically = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val better = if (diff < 0) "A" else "B"
                 val percent = ((kotlin.math.max(valueA, valueB) - kotlin.math.min(valueA, valueB)) / kotlin.math.min(valueA, valueB)) * 100
-                "Pizza $better is ${"%.1f".format(percent)}% better value."
+                "Pizza $better is ${"%.2f".format(percent)}% better value."
             }
         } else {
             binding.resultText.text = ""

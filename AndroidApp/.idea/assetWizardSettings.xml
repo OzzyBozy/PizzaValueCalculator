@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="vheaderd" />
-                            <entry key="sourceFile" value="C:\Users\Tibet\AndroidStudioProjects\PVC\AndroidApp\app\src\main\res\drawable\Vectors\VheaderD.svg" />
+                            <entry key="outputName" value="settings" />
+                            <entry key="sourceFile" value="C:\Users\Tibet\AndroidStudioProjects\PVC\AndroidApp\app\src\main\res\drawable\Vectors\Settings.svg" />
                           </map>
                         </option>
                       </PersistentState>
