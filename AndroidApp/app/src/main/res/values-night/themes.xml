@@ -1,7 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.PVC" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="pvcBackground">@color/backgroundN</item>
+        <item name="pvcRedBanner">@color/redbannerN</item>
+        <item name="pvcWhiteBanner">@color/whitebannerN</item>
+        <item name="pvcBoxFill">@color/boxinN</item>
+        <item name="pvcBoxBorder">@color/boxoutN</item>
+        <item name="pvcText">@color/whitebannerN</item>
+        <item name="pvcTextBorder">@color/background</item>
+        <item name="pvcBoxText">@color/white</item>
+        <item name="android:statusBarColor">@color/wood</item>
     </style>
 </resources>
