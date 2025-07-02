@@ -1,5 +1,7 @@
-🍕 Pizza Value Calculator (PVC) 🍕
-===
+<picture>
+  <source srcset="Images/HeaderDark.png" media="(prefers-color-scheme: dark)" />
+  <img src="Images/Header.png" alt="header" />
+</picture> 
 
 Welcome! Have you ever wondered if you're getting your money's worth from your pizza while choosing between different sizes? This app offers an intuitive and quick way to compare different pizza sizes and prices to calculate which option gives you the most value.
 
