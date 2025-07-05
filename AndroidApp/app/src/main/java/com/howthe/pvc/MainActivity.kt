@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ImageButton
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import com.howthe.pvc.databinding.ActivityMainBinding
 import kotlin.math.PI
@@ -24,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val priceInputs = listOf(binding.inputPriceA, binding.inputPriceB)
         val sizeInputs = listOf(binding.inputSizeA, binding.inputSizeB)
@@ -46,13 +47,20 @@ class MainActivity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
-
+        val settingsLayout = findViewById<ScrollView>(R.id.settingsMenu)
+        val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
+        val settingsExitButton = findViewById<ImageButton>(R.id.settingsExitButton)
+        settingsButton.setOnClickListener {
+            settingsLayout.visibility = View.VISIBLE
+        }
+        settingsExitButton.setOnClickListener {
+            settingsLayout.visibility = View.GONE
+        }
     }
     val isRadius = true
     private fun recalculate() {
         if (isUpdatingProgrammatically) return
         isUpdatingProgrammatically = true
-
 
         val sizeA = binding.inputSizeA.text.toString().toDoubleOrNull()
         val priceA = binding.inputPriceA.text.toString().toDoubleOrNull()
@@ -75,7 +83,6 @@ class MainActivity : AppCompatActivity() {
                 updateHintFor(input, valueA, valueB, areaA, areaB, isRadius)
             }
         }
-
         updatePizzaView(areaA, areaB)
 
         if (valueA != null && valueB != null) {
