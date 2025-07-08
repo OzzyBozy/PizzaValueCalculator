@@ -5,27 +5,66 @@
 
 package com.howthe.pvc
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ScrollView
+import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.howthe.pvc.databinding.ActivityMainBinding
 import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
+import androidx.core.content.edit
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var isUpdatingProgrammatically = false
 
+    private val PREFS_NAME = "pvc_settings"
+    private val KEY_THEME = "theme_preference"
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeUtils.applyTheme(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (savedInstanceState != null) {
+            val visibility = savedInstanceState.getInt("settingsMenuVisibility", View.GONE)
+            binding.settingsMenu.visibility = visibility
+        } else {
+            binding.settingsMenu.visibility = View.GONE // default
+        }
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val currentTheme = prefs.getString(KEY_THEME, "default")
+
+        val darkModeSwitch = binding.darkModeSwitch
+        val themeTextView = binding.themeText
+
+        when (currentTheme) {
+            "dark" -> {
+                darkModeSwitch.isChecked = true
+                themeTextView.background = null
+                Log.d("MainActivity", "Dark theme applied")
+
+            }
+            "light" -> {
+                darkModeSwitch.isChecked = false
+                themeTextView.background = null
+                Log.d("MainActivity", "Light theme applied")
+            }
+            else -> {
+                themeTextView.setBackgroundResource(R.drawable.gray_border)
+                Log.d("MainActivity", "Default theme applied")
+            }
+        }
 
         val priceInputs = listOf(binding.inputPriceA, binding.inputPriceB)
         val sizeInputs = listOf(binding.inputSizeA, binding.inputSizeB)
@@ -47,16 +86,39 @@ class MainActivity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
-        val settingsLayout = findViewById<ScrollView>(R.id.settingsMenu)
-        val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
-        val settingsExitButton = findViewById<ImageButton>(R.id.settingsExitButton)
+        val settingsLayout = binding.settingsMenu
+        val settingsButton = binding.settingsButton
+        val settingsExitButton = binding.settingsExitButton
         settingsButton.setOnClickListener {
             settingsLayout.visibility = View.VISIBLE
         }
         settingsExitButton.setOnClickListener {
             settingsLayout.visibility = View.GONE
         }
+        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                ThemeUtils.setThemePreference(prefs, ThemeUtils.THEME_DARK)
+                updateUIForTheme(ThemeUtils.THEME_DARK, darkModeSwitch, themeTextView)
+            } else {
+                ThemeUtils.setThemePreference(prefs, ThemeUtils.THEME_LIGHT)
+                updateUIForTheme(ThemeUtils.THEME_LIGHT, darkModeSwitch, themeTextView)
+            }
+            ThemeUtils.applyTheme(this)
+        }
+        themeTextView.setOnClickListener {
+            if (currentTheme != "default") {
+                ThemeUtils.setThemePreference(prefs, ThemeUtils.THEME_SYSTEM)
+                updateUIForTheme(ThemeUtils.THEME_SYSTEM, darkModeSwitch, themeTextView)
+                ThemeUtils.applyTheme(this)
+            }
+        }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
+    }
+
     val isRadius = true
     private fun recalculate() {
         if (isUpdatingProgrammatically) return
@@ -199,5 +261,65 @@ class MainActivity : AppCompatActivity() {
                 binding.pizzaB.scaleY = scaleB
             }
         }
+    }
+    private fun updateUIForTheme(theme: String, switch: Switch, textView: TextView) {
+        when (theme) {
+            ThemeUtils.THEME_SYSTEM -> {
+                switch.isChecked = false
+                setTextViewBorder(textView, true)
+            }
+            else -> {
+                switch.isChecked = theme == ThemeUtils.THEME_DARK
+                setTextViewBorder(textView, false)
+            }
+        }
+    }
+
+    private fun setTextViewBorder(textView: TextView, showBorder: Boolean) {
+        if (showBorder) {
+            textView.setBackgroundResource(R.drawable.gray_border)
+        } else {
+            textView.background = null
+        }
+    }
+
+    object ThemeUtils {
+        private const val KEY_THEME = "theme_preference"
+
+        const val THEME_SYSTEM = "default"
+        const val THEME_LIGHT = "light"
+        const val THEME_DARK = "dark"
+
+        fun getThemePreference(prefs: SharedPreferences): String {
+            return prefs.getString(KEY_THEME, THEME_SYSTEM) ?: THEME_SYSTEM
+        }
+
+        fun setThemePreference(prefs: SharedPreferences, theme: String) {
+            prefs.edit() { putString(KEY_THEME, theme) }
+        }
+
+        fun applyTheme(activity: AppCompatActivity) {
+            val prefs = activity.getSharedPreferences("pvc_settings", MODE_PRIVATE)
+            val selectedTheme = getThemePreference(prefs)
+
+            val newMode = when (selectedTheme) {
+                THEME_LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+                THEME_DARK -> AppCompatDelegate.MODE_NIGHT_YES
+                else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            }
+
+            val lastMode = prefs.getInt("last_mode_applied", -1)
+
+            if (lastMode != newMode && newMode != -1) {
+                prefs.edit() { putInt("last_mode_applied", newMode) }
+                AppCompatDelegate.setDefaultNightMode(newMode)
+                activity.recreate()
+            }else if (lastMode != newMode && newMode == -1){
+                prefs.edit() { putInt("last_mode_applied", newMode) }
+                AppCompatDelegate.setDefaultNightMode(newMode)
+                }
+        }
+
+
     }
 }
