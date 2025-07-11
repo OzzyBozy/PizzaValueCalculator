@@ -9,6 +9,7 @@
         <item name="pvcTextBorder">@color/background</item>
         <item name="pvcBoxText">@color/black</item>
         <item name="android:statusBarColor">@color/wood</item>
+
     </style>
 
     <style name="Theme.PVC" parent="Base.Theme.PVC" />

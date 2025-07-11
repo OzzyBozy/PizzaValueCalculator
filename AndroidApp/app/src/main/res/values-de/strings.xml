@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pizzavaluecalculator">PizzaWertRechner</string>
+    <string name="size_a">Größe A:</string>
+    <string name="enter_size">Größe eingeben</string>
+    <string name="price_a">Preis A:</string>
+    <string name="enter_price">Preis eingeben</string>
+    <string name="size_b">Größe B:</string>
+    <string name="price_b">Preis B:</string>
+    <string name="settings">Einstellungen</string>
+    <string name="dark_mode">Dunkelmodus</string>
+    <string name="language">Sprache</string>
+    <string name="equal_value">Die beiden Pizzas haben den gleichen Wert</string>
+    <string name="better_pizza1">"Pizza "</string>
+    <string name="better_pizza2">" hat "</string>
+    <string name="better_pizza3">% mehr Wert</string>
+</resources>

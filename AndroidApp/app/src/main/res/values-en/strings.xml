@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">PVC</string>
     <string name="pizzavaluecalculator">PizzaValueCalculator</string>
     <string name="size_a">Size A:</string>
     <string name="enter_size">Enter size</string>
@@ -11,7 +11,7 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="language">Language</string>
     <string name="equal_value">Both pizzas have equal value</string>
-    <string name="better_pizza1">Pizza</string>
-    <string name="better_pizza2">is</string>
+    <string name="better_pizza1">"Pizza "</string>
+    <string name="better_pizza2">" is "</string>
     <string name="better_pizza3">% better value</string>
 </resources>

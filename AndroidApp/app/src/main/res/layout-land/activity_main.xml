@@ -285,10 +285,13 @@
                     android:textSize="16sp"
                     android:textColor="?attr/pvcText" />
 
-                <Switch
+                <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/darkModeSwitch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    app:thumbTint="?attr/pvcBoxBorder"
+                    app:trackTint="?attr/pvcBackground" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
