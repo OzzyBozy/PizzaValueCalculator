@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">Magnitudo B:</string>
+    <string name="size_a">Magnitudo A:</string>
+    <string name="settings">Occasus</string>
+    <string name="price_b">Pretium B:</string>
+    <string name="price_a">Pretium A:</string>
+    <string name="pizzavaluecalculator">Calculatrix Valoris Pizzae</string>
+    <string name="better_pizza1">Pizza</string>
+    <string name="better_pizza2">maioris pretii est</string>
+    <string name="better_pizza3">% maioris pretii</string>
+    <string name="language">Lingua</string>
+    <string name="enter_size">Magnitudinem inserere</string>
+    <string name="enter_price">Pretium inserere</string>
+    <string name="dark_mode">Modus obscurus</string>
+    <string name="equal_value">Utraque pizza aequum valorem habet</string>
+</resources>

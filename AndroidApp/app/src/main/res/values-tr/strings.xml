@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pizzavaluecalculator">PizzaDeğerHesaplayıcısı</string>
+    <string name="pizzavaluecalculator">Pizza Değer Hesaplayıcısı</string>
     <string name="size_a">Boyut A:</string>
     <string name="enter_size">Boyut giriniz</string>
     <string name="price_a">Fiyat A:</string>

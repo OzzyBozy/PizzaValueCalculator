@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">Μέγεθος B:</string>
+    <string name="size_a">Μέγεθος A:</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="price_b">Τιμή B:</string>
+    <string name="price_a">Τιμή A:</string>
+    <string name="pizzavaluecalculator">Υπολογιστής Αξίας Πίτσας</string>
+    <string name="better_pizza1">Η πίτσα</string>
+    <string name="better_pizza2">έχει καλύτερη αξία</string>
+    <string name="better_pizza3">% περισσότερη αξία</string>
+    <string name="language">Γλώσσα</string>
+    <string name="enter_size">Εισάγετε μέγεθος</string>
+    <string name="enter_price">Εισάγετε τιμή</string>
+    <string name="dark_mode">Σκούρο θέμα</string>
+    <string name="equal_value">Και οι δύο πίτσες έχουν την ίδια αξία</string>
+</resources>

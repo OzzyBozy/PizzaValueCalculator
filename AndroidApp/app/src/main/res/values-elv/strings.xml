@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">Anta B:</string>
+    <string name="size_a">Anta A:</string>
+    <string name="settings">Fetalyë</string>
+    <string name="price_b">Antaina B:</string>
+    <string name="price_a">Antaina A:</string>
+    <string name="pizzavaluecalculator">Pizza Nauva Nátien</string>
+    <string name="better_pizza1">Corma </string>
+    <string name="language">Lambë</string>
+    <string name="better_pizza2"> ná alya </string>
+    <string name="enter_size">Mittanya anta</string>
+    <string name="enter_price">Mittanya antaina</string>
+    <string name="dark_mode">Mornë Tyelë</string>
+    <string name="equal_value">I atarwa cormar nauvar equë</string>
+    <string name="better_pizza3">% alya nauva</string>
+</resources>

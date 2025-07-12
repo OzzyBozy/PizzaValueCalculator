@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pizzavaluecalculator">Calculateur deValeurPizza</string>
+    <string name="pizzavaluecalculator">Calculateur de Valeur Pizza</string>
     <string name="size_a">Taille A:</string>
     <string name="enter_size">Entrez le taille</string>
     <string name="price_a">Prix A:</string>

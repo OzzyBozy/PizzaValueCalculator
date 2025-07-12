@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">サイズ B：</string>
+    <string name="size_a">サイズ A：</string>
+    <string name="settings">設定</string>
+    <string name="price_b">価格 B：</string>
+    <string name="price_a">価格 A：</string>
+    <string name="pizzavaluecalculator">ピザ価値計算機</string>
+    <string name="better_pizza1">ピザ </string>
+    <string name="better_pizza2"> の方がコスパが良い </string>
+    <string name="better_pizza3">％お得</string>
+    <string name="language">言語</string>
+    <string name="enter_size">サイズを入力</string>
+    <string name="enter_price">価格を入力</string>
+    <string name="dark_mode">ダークモード</string>
+    <string name="equal_value">両方のピザは同じ価値です</string>
+</resources>

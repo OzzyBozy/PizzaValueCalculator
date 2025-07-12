@@ -100,8 +100,8 @@ class MainActivity : AppCompatActivity() {
             }
             ThemeUtils.applyTheme(this)
         }
-        val languageCodes = listOf("en", "de", "fr", "tr")
-        val languages = listOf("English", "Deutsch", "Français", "Türkçe")
+        val languageCodes = listOf("en", "de", "fr", "tr", "ar", "es", "hi", "ja", "ko", "ru", "zh", "elv")
+        val languages = listOf("English", "Deutsch", "Français", "Türkçe", "العربية", "Español", "हिंदी", "日本語", "한국어", "Русский", "简体中文", "Elvish")
         val langPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val savedLang = langPrefs.getString("app_language", "en")
 

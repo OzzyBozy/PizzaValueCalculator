@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">Tamaño B:</string>
+    <string name="size_a">Tamaño A:</string>
+    <string name="settings">Ajustes</string>
+    <string name="price_b">Precio B:</string>
+    <string name="price_a">Precio A:</string>
+    <string name="pizzavaluecalculator">Calculadora de Valor de Pizza</string>
+    <string name="better_pizza1">Pizza </string>
+    <string name="better_pizza2"> tiene un mejor valor </string>
+    <string name="better_pizza3">% mejor valor</string>
+    <string name="language">Idioma</string>
+    <string name="enter_size">Ingresar tamaño</string>
+    <string name="enter_price">Ingresar precio</string>
+    <string name="dark_mode">Modo oscuro</string>
+    <string name="equal_value">Ambas pizzas tienen el mismo valor</string>
+</resources>
