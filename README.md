@@ -17,7 +17,11 @@ Welcome! Have you ever wondered if you're getting your money's worth from your p
 
 - Pizza sizes (in diameter or radius)
 - Pizza prices
-- (Optionally) Fractional sizes for more advanced comparisons
+- *(Work in progress) Fractional sizes for more advanced comparisons*
+
+**And the following settings:**
+- UI theme
+- App language (some translations were made using AI tools and may contain errors)
 
 The app then calculates and compares price-per-area values for each pizza, showing you exactly which one delivers more pizza per money with percentages. It also visually scales the pizzas to show their size difference.
 
@@ -57,7 +61,7 @@ The app then calculates and compares price-per-area values for each pizza, showi
 
 | Build in Android Studio | Download APK for Android |
 | --- | --- |
-| Clone the repository: `git clone https://github.com/OzzyBozy/PizzaValueCalculator.git` | Download the `PVC-0.1.0-alpha.apk` file from the [Releases](https://github.com/OzzyBozy/PizzaValueCalculator/releases) page. |
+| Clone the repository: `git clone https://github.com/OzzyBozy/PizzaValueCalculator.git` | Download the `PVC-(prefered version).apk` file from the [Releases](https://github.com/OzzyBozy/PizzaValueCalculator/releases) page. |
 | Open the project in **Android Studio**. | Transfer or download the APK to your Android device via the link. |
 | Let Gradle sync and resolve dependencies automatically. | Ensure that your device allows installation from unknown sources (Settings → Security → Unknown sources). |
 | Click ▶️ to build and run either on your device or emulator. | Open the APK file to install the app. |
@@ -73,6 +77,7 @@ You are welcome to:
 - Submit issues
 - Suggest features
 - Discuss bugs
+- Help with translations
 - Develop the app for other platforms
 
 Direct commits to `main` are restricted so use Pull Requests if you wish to suggest change.
