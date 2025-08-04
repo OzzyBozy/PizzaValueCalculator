@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:width="64dp"
+                    android:width="80dp"
                     android:text="@string/size_a"
                     android:textColor="?attr/pvcText"
                     android:textStyle="bold"
@@ -127,7 +127,7 @@
                     android:textColor="?attr/pvcText"
                     android:textStyle="bold"
                     android:layout_marginStart="10dp"
-                    android:width="64dp"
+                    android:width="80dp"
                     android:text="@string/price_a"
                     android:textSize="16sp" />
 
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:width="64dp"
+                    android:width="80dp"
                     android:text="@string/size_b"
                     android:textColor="?attr/pvcText"
                     android:textStyle="bold"
@@ -205,7 +205,7 @@
                     android:textColor="?attr/pvcText"
                     android:textStyle="bold"
                     android:layout_marginStart="10dp"
-                    android:width="64dp"
+                    android:width="80dp"
                     android:text="@string/price_b"
                     android:textSize="16sp" />
 
@@ -264,7 +264,7 @@
                 android:adjustViewBounds="true"
                 android:layout_alignParentEnd="true"
                 android:background="@null"
-                app:srcCompat="@drawable/settings"/>
+                app:srcCompat="@drawable/settingsexit"/>
         </RelativeLayout>
             <View
                 android:layout_width="match_parent"
