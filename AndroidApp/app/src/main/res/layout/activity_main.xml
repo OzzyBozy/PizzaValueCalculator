@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+=======
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+>>>>>>> UpdateBeta
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/pvcBackground">
+<<<<<<< HEAD
 
+=======
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+>>>>>>> UpdateBeta
     <LinearLayout
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
@@ -15,6 +25,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+<<<<<<< HEAD
+=======
+            android:contentDescription="@string/pizzavaluecalculator"
+>>>>>>> UpdateBeta
             android:scaleType="fitXY"
             android:src="@drawable/vheader" />
 
@@ -42,6 +56,7 @@
                     android:textSize="20sp" />
 
                 <ImageButton
+<<<<<<< HEAD
                     android:id="@+id/imageButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -50,6 +65,16 @@
                     android:background="@null"
                     app:srcCompat="@drawable/settings"
                     android:visibility="gone"/>
+=======
+                    android:id="@+id/settingsButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/settings"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    app:srcCompat="@drawable/settings"/>
+>>>>>>> UpdateBeta
             </LinearLayout>
 
             <!-- Container stacking pizzas vertically in portrait -->
@@ -87,8 +112,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+<<<<<<< HEAD
                         android:width="64dp"
                         android:text="Size A:"
+=======
+                        android:width="80dp"
+                        android:text="@string/size_a"
+>>>>>>> UpdateBeta
                         android:textColor="?attr/pvcText"
                         android:textStyle="bold"
                         android:textSize="16sp" />
@@ -99,7 +129,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
+<<<<<<< HEAD
                         android:hint="Enter size"
+=======
+                        android:hint="@string/enter_size"
+>>>>>>> UpdateBeta
                         android:inputType="numberDecimal"
                         android:textColor="?attr/pvcBoxText"/>
                 </LinearLayout>
@@ -123,8 +157,13 @@
                         android:textColor="?attr/pvcText"
                         android:textStyle="bold"
                         android:layout_marginStart="10dp"
+<<<<<<< HEAD
                         android:width="64dp"
                         android:text="Price A:"
+=======
+                        android:width="80dp"
+                        android:text="@string/price_a"
+>>>>>>> UpdateBeta
                         android:textSize="16sp" />
 
                     <EditText
@@ -133,7 +172,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
+<<<<<<< HEAD
                         android:hint="Enter price"
+=======
+                        android:hint="@string/enter_price"
+>>>>>>> UpdateBeta
                         android:inputType="numberDecimal"
                         android:textColor="?attr/pvcBoxText"/>
                 </LinearLayout>
@@ -168,8 +211,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+<<<<<<< HEAD
                         android:width="64dp"
                         android:text="Size B:"
+=======
+                        android:width="80dp"
+                        android:text="@string/size_b"
+>>>>>>> UpdateBeta
                         android:textColor="?attr/pvcText"
                         android:textStyle="bold"
                         android:textSize="16sp" />
@@ -180,7 +228,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="Enter size"
+                        android:hint="@string/enter_size"
                         android:inputType="numberDecimal"
                         android:textColor="?attr/pvcBoxText"/>
                 </LinearLayout>
@@ -201,9 +249,15 @@
                         android:textColor="?attr/pvcText"
                         android:textStyle="bold"
                         android:layout_marginStart="10dp"
+<<<<<<< HEAD
                         android:width="64dp"
                         android:text="Price B:"
                         android:textSize="16sp" />
+=======
+                        android:width="80dp"
+                        android:text="@string/price_b"
+                        android:textSize="16sp"/>
+>>>>>>> UpdateBeta
 
                     <EditText
                         android:id="@+id/inputPriceB"
@@ -211,7 +265,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="Enter price"
+                        android:hint="@string/enter_price"
                         android:inputType="numberDecimal"
                         android:textColor="?attr/pvcBoxText"/>
                 </LinearLayout>
@@ -219,4 +273,104 @@
         </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/textbox"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        android:id="@+id/settingsMenu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/settingsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings"
+                    android:textAlignment="center"
+                    android:textColor="?attr/pvcText"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"/>
+
+                <ImageButton
+                    android:id="@+id/settingsExitButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@null"
+                    app:srcCompat="@drawable/settingsexit"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="?attr/pvcBoxBorder"
+                android:layout_margin="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/themeText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dark_mode"
+                    android:textSize="16sp"
+                    android:textColor="?attr/pvcBoxText" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/darkModeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:thumbTint="?attr/pvcBoxBorder"
+                    app:trackTint="?attr/pvcBackground" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/languageText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/language"
+                    android:textSize="16sp"
+                    android:textColor="?attr/pvcBoxText" />
+
+
+                <Spinner
+                    android:id="@+id/languageSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:popupBackground="?attr/pvcBackground"
+                    android:background="@drawable/textbox"
+                    android:paddingVertical="4dp"
+                    android:paddingStart="2dp"
+                    android:spinnerMode="dropdown"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>

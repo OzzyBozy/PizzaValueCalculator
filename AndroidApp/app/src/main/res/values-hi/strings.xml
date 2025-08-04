@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">आकार B:</string>
+    <string name="size_a">आकार A:</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="price_b">कीमत B:</string>
+    <string name="price_a">कीमत A:</string>
+    <string name="pizzavaluecalculator">पिज़्ज़ा मूल्य कैलकुलेटर</string>
+    <string name="better_pizza1">पिज़्ज़ा </string>
+    <string name="better_pizza2"> का मूल्य बेहतर है </string>
+    <string name="better_pizza3">% अधिक मूल्य</string>
+    <string name="language">भाषा</string>
+    <string name="enter_size">आकार दर्ज करें</string>
+    <string name="enter_price">कीमत दर्ज करें</string>
+    <string name="dark_mode">डार्क मोड</string>
+    <string name="equal_value">दोनों पिज़्ज़ा का मूल्य समान है</string>
+</resources>

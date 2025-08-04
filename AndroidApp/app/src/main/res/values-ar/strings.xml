@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">الحجم ب:</string>
+    <string name="size_a">الحجم أ:</string>
+    <string name="settings">الإعدادات</string>
+    <string name="price_b">السعر ب:</string>
+    <string name="price_a">السعر أ:</string>
+    <string name="pizzavaluecalculator">حاسبة قيمة البيتزا</string>
+    <string name="better_pizza1">البيتزا </string>
+    <string name="better_pizza2"> لها قيمة أفضل </string>
+    <string name="better_pizza3">٪ أكثر قيمة</string>
+    <string name="language">اللغة</string>
+    <string name="enter_size">أدخل الحجم</string>
+    <string name="enter_price">أدخل السعر</string>
+    <string name="dark_mode">الوضع الداكن</string>
+    <string name="equal_value">كلا البيتزتين لهما نفس القيمة</string>
+</resources>

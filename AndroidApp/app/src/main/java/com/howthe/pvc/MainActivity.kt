@@ -5,26 +5,62 @@
 
 package com.howthe.pvc
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.howthe.pvc.databinding.ActivityMainBinding
 import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
+import androidx.core.content.edit
+import android.content.Context
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var isUpdatingProgrammatically = false
 
+    private val PREFS_NAME = "pvc_settings"
+    private val KEY_THEME = "theme_preference"
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeUtils.applyTheme(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (savedInstanceState != null) {
+            val visibility = savedInstanceState.getInt("settingsMenuVisibility", View.GONE)
+            binding.settingsMenu.visibility = visibility
+        } else {
+            binding.settingsMenu.visibility = View.GONE
+        }
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val currentTheme = prefs.getString(KEY_THEME, "default")
+
+        val darkModeSwitch = binding.darkModeSwitch
+        val themeTextView = binding.themeText
+
+        when (currentTheme) {
+            "dark" -> {
+                darkModeSwitch.isChecked = true
+                themeTextView.background = null
+            }
+            "light" -> {
+                darkModeSwitch.isChecked = false
+                themeTextView.background = null
+            }
+            else -> {
+                darkModeSwitch.isChecked = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+            }
+        }
 
         val priceInputs = listOf(binding.inputPriceA, binding.inputPriceB)
         val sizeInputs = listOf(binding.inputSizeA, binding.inputSizeB)
@@ -46,13 +82,63 @@ class MainActivity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
+        val settingsLayout = binding.settingsMenu
+        val settingsButton = binding.settingsButton
+        val settingsExitButton = binding.settingsExitButton
+        settingsButton.setOnClickListener {
+            settingsLayout.visibility = View.VISIBLE
+        }
+        settingsExitButton.setOnClickListener {
+            settingsLayout.visibility = View.GONE
+        }
+        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                prefs.edit { putString(KEY_THEME, ThemeUtils.THEME_DARK) }
+
+            } else {
+                prefs.edit { putString(KEY_THEME, ThemeUtils.THEME_LIGHT) }
+            }
+            ThemeUtils.applyTheme(this)
+        }
+        val languageCodes = listOf("en", "it", "de", "fr", "tr", "ar", "es", "hi", "ja", "ko", "ru", "zh", "elv")
+        val languages = listOf("English", "Italiano", "Deutsch", "Français", "Türkçe", "العربية", "Español", "हिंदी", "日本語", "한국어", "Русский", "简体中文", "Elvish")
+        val langPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val savedLang = langPrefs.getString("app_language", "en")
+
+        val langAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
+        langAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.languageSpinner?.adapter = langAdapter
+
+        val savedIndex = languageCodes.indexOf(savedLang)
+        if (savedIndex != -1) {
+            binding.languageSpinner?.setSelection(savedIndex)
+        }
+
+        binding.languageSpinner?.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedLangCode = languageCodes[position]
+                if (selectedLangCode != savedLang) {
+                    langPrefs.edit() { putString("app_language", selectedLangCode) }
+                    LocaleUtils.setLocale(this@MainActivity, selectedLangCode)
+                    recreate()
+                }
+            }
+
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
+        }
+
 
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
+    }
+
     val isRadius = true
     private fun recalculate() {
         if (isUpdatingProgrammatically) return
         isUpdatingProgrammatically = true
-
 
         val sizeA = binding.inputSizeA.text.toString().toDoubleOrNull()
         val priceA = binding.inputPriceA.text.toString().toDoubleOrNull()
@@ -75,18 +161,17 @@ class MainActivity : AppCompatActivity() {
                 updateHintFor(input, valueA, valueB, areaA, areaB, isRadius)
             }
         }
-
         updatePizzaView(areaA, areaB)
 
         if (valueA != null && valueB != null) {
             val epsilon = 0.0001
             val diff = valueA - valueB
             binding.resultText.text = if (kotlin.math.abs(diff) < epsilon) {
-                "Both pizzas have equal value."
+                getString(R.string.equal_value)
             } else {
                 val better = if (diff < 0) "A" else "B"
                 val percent = ((kotlin.math.max(valueA, valueB) - kotlin.math.min(valueA, valueB)) / kotlin.math.min(valueA, valueB)) * 100
-                "Pizza $better is ${"%.2f".format(percent)}% better value."
+                getString(R.string.better_pizza1) + better + getString(R.string.better_pizza2) + "%.2f".format(percent) + getString(R.string.better_pizza3)
             }
         } else {
             binding.resultText.text = ""
@@ -110,7 +195,7 @@ class MainActivity : AppCompatActivity() {
                         val estPriceA = valueB * areaA
                         binding.inputPriceA.hint = "%.2f".format(estPriceA)
                     } else {
-                        binding.inputPriceA.hint = "Enter price A"
+                        binding.inputPriceA.hint = getString(R.string.enter_price) //A
                     }
                 }
             }
@@ -120,7 +205,7 @@ class MainActivity : AppCompatActivity() {
                         val estPriceB = valueA * areaB
                         binding.inputPriceB.hint = "%.2f".format(estPriceB)
                     } else {
-                        binding.inputPriceB.hint = "Enter price B"
+                        binding.inputPriceB.hint = getString(R.string.enter_price) //B
                     }
                 }
             }
@@ -139,9 +224,9 @@ class MainActivity : AppCompatActivity() {
                         val estSizeA = estAreaA?.let {
                             if (isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
                         }
-                        binding.inputSizeA.hint = estSizeA?.let { "%.2f".format(it) } ?: "Enter size A"
+                        binding.inputSizeA.hint = estSizeA?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
-                        binding.inputSizeA.hint = "Enter size A"
+                        binding.inputSizeA.hint = getString(R.string.enter_size)
                     }
                 }
             }
@@ -160,9 +245,9 @@ class MainActivity : AppCompatActivity() {
                         val estSizeB = estAreaB?.let {
                             if (isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
                         }
-                        binding.inputSizeB.hint = estSizeB?.let { "%.2f".format(it) } ?: "Enter size B"
+                        binding.inputSizeB.hint = estSizeB?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
-                        binding.inputSizeB.hint = "Enter size B"
+                        binding.inputSizeB.hint = getString(R.string.enter_size)
                     }
                 }
             }
@@ -192,5 +277,55 @@ class MainActivity : AppCompatActivity() {
                 binding.pizzaB.scaleY = scaleB
             }
         }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val context = LocaleUtils.applySavedLocale(newBase)
+        super.attachBaseContext(context)
+    }
+
+    object ThemeUtils {
+        private const val KEY_THEME = "theme_preference"
+
+        const val THEME_SYSTEM = "default"
+        const val THEME_LIGHT = "light"
+        const val THEME_DARK = "dark"
+
+        fun applyTheme(activity: AppCompatActivity) {
+            val prefs = activity.getSharedPreferences("pvc_settings", MODE_PRIVATE)
+            val selectedTheme = prefs.getString(KEY_THEME, THEME_SYSTEM) ?: THEME_SYSTEM
+
+            val newMode = when (selectedTheme) {
+                THEME_LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+                THEME_DARK -> AppCompatDelegate.MODE_NIGHT_YES
+                else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            }
+
+            val lastMode = prefs.getInt("last_mode_applied", -1)
+
+            if (lastMode != newMode) {
+                prefs.edit { putInt("last_mode_applied", newMode) }
+                AppCompatDelegate.setDefaultNightMode(newMode)
+                activity.recreate()
+            }
+        }
+    }
+}
+
+object LocaleUtils {
+    fun setLocale(context: Context, language: String): Context {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+
+        val config = Configuration(context.resources.configuration)
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+        return context.createConfigurationContext(config)
+    }
+
+    fun applySavedLocale(base: Context): Context {
+        val prefs = base.getSharedPreferences("pvc_settings", Context.MODE_PRIVATE)
+        val langCode = prefs.getString("app_language", "en") ?: "en"
+        return setLocale(base, langCode)
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">尺寸 B：</string>
+    <string name="size_a">尺寸 A：</string>
+    <string name="settings">设置</string>
+    <string name="price_b">价格 B：</string>
+    <string name="price_a">价格 A：</string>
+    <string name="pizzavaluecalculator">披萨价值计算器</string>
+    <string name="better_pizza1">披萨 </string>
+    <string name="better_pizza2"> 性价比更高 </string>
+    <string name="better_pizza3">％更划算</string>
+    <string name="language">语言</string>
+    <string name="enter_size">输入尺寸</string>
+    <string name="enter_price">输入价格</string>
+    <string name="dark_mode">深色模式</string>
+    <string name="equal_value">两种披萨价值相等</string>
+</resources>

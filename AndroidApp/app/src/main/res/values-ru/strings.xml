@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="size_b">Размер B:</string>
+    <string name="size_a">Размер A:</string>
+    <string name="settings">Настройки</string>
+    <string name="price_b">Цена B:</string>
+    <string name="price_a">Цена A:</string>
+    <string name="pizzavaluecalculator">Калькулятор Ценности Пиццы</string>
+    <string name="better_pizza1">Пицца </string>
+    <string name="better_pizza2"> имеет лучшую ценность </string>
+    <string name="better_pizza3">% больше выгоды</string>
+    <string name="language">Язык</string>
+    <string name="enter_size">Введите размер</string>
+    <string name="enter_price">Введите цену</string>
+    <string name="dark_mode">Тёмная тема</string>
+    <string name="equal_value">Обe пиццы имеют одинаковую ценность</string>
+</resources>

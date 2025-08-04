@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pizzavaluecalculator">Calculateur de Valeur Pizza</string>
+    <string name="size_a">Taille A:</string>
+    <string name="enter_size">Entrez le taille</string>
+    <string name="price_a">Prix A:</string>
+    <string name="enter_price">Entrez le pris</string>
+    <string name="size_b">Taille B:</string>
+    <string name="price_b">Prix B:</string>
+    <string name="settings">Paramètres</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="language">Langue</string>
+    <string name="equal_value">Les deux pizzas ont la mêne valeur</string>
+    <string name="better_pizza1">"La pizza "</string>
+    <string name="better_pizza2">" a un meilleur rapport qualité-prix de "</string>
+    <string name="better_pizza3">%</string>
+</resources>
