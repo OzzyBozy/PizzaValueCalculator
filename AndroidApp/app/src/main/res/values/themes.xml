@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.PVC" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.PVC" parent="Theme.AppCompat.DayNight">
         <item name="pvcBackground">@color/background</item>
         <item name="pvcRedBanner">@color/redbanner</item>
         <item name="pvcWhiteBanner">@color/whitebanner</item>
@@ -9,6 +9,8 @@
         <item name="pvcTextBorder">@color/background</item>
         <item name="pvcBoxText">@color/black</item>
         <item name="android:statusBarColor">@color/wood</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.PVC" parent="Base.Theme.PVC" />

@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
             binding.inputSizeB
         ).forEach { input ->
             if (!input.isFocused) {
-                updateHintFor(input, valueA, valueB, areaA, areaB, isRadius)
+                updateHintFor(input, valueA, valueB, areaA, areaB)
             }
         }
         updatePizzaView(areaA, areaB)
@@ -181,7 +181,6 @@ class MainActivity : AppCompatActivity() {
         valueB: Double? = null,
         areaA: Double? = null,
         areaB: Double? = null,
-        isRadius: Boolean = false
     ) {
         when (input) {
             binding.inputPriceA -> {
@@ -288,7 +287,7 @@ class MainActivity : AppCompatActivity() {
         const val THEME_LIGHT = "light"
         const val THEME_DARK = "dark"
         fun initializeDayNightMode(context: Context) {
-            val prefs = context.getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
+            val prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             val selectedTheme = prefs.getString(KEY_THEME, THEME_SYSTEM) ?: THEME_SYSTEM
 
             val nightMode = when (selectedTheme) {
@@ -300,7 +299,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun applyThemeChangeAndRecreate(activity: AppCompatActivity) {
-            val prefs = activity.getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
+            val prefs = activity.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             val selectedTheme = prefs.getString(KEY_THEME, THEME_SYSTEM) ?: THEME_SYSTEM
 
             val newMode = when (selectedTheme) {
