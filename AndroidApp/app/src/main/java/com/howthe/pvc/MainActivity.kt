@@ -9,7 +9,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -27,11 +26,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var isUpdatingProgrammatically = false
 
-    private val PREFS_NAME = "pvc_settings"
-    private val KEY_THEME = "theme_preference"
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.applyTheme(this)
+        ThemeUtils.initializeDayNightMode(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -42,23 +40,21 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.settingsMenu.visibility = View.GONE
         }
-        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        val currentTheme = prefs.getString(KEY_THEME, "default")
+
+        val prefs = getSharedPreferences(ThemeUtils.PREFS_NAME, MODE_PRIVATE)
+        val currentTheme = prefs.getString(ThemeUtils.KEY_THEME, ThemeUtils.THEME_SYSTEM) ?: ThemeUtils.THEME_SYSTEM
 
         val darkModeSwitch = binding.darkModeSwitch
-        val themeTextView = binding.themeText
-
         when (currentTheme) {
-            "dark" -> {
+            ThemeUtils.THEME_DARK -> {
                 darkModeSwitch.isChecked = true
-                themeTextView.background = null
             }
-            "light" -> {
+            ThemeUtils.THEME_LIGHT -> {
                 darkModeSwitch.isChecked = false
-                themeTextView.background = null
             }
-            else -> {
-                darkModeSwitch.isChecked = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+            ThemeUtils.THEME_SYSTEM -> {
+                val uiModeNight = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                darkModeSwitch.isChecked = (uiModeNight == Configuration.UI_MODE_NIGHT_YES)
             }
         }
 
@@ -91,30 +87,32 @@ class MainActivity : AppCompatActivity() {
         settingsExitButton.setOnClickListener {
             settingsLayout.visibility = View.GONE
         }
-        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                prefs.edit { putString(KEY_THEME, ThemeUtils.THEME_DARK) }
 
+        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            val newThemePreference = if (isChecked) {
+                ThemeUtils.THEME_DARK
             } else {
-                prefs.edit { putString(KEY_THEME, ThemeUtils.THEME_LIGHT) }
+                ThemeUtils.THEME_LIGHT
             }
-            ThemeUtils.applyTheme(this)
+            prefs.edit { putString(ThemeUtils.KEY_THEME, newThemePreference) }
+            ThemeUtils.applyThemeChangeAndRecreate(this)
         }
+
         val languageCodes = listOf("en", "it", "de", "fr", "tr", "ar", "es", "hi", "ja", "ko", "ru", "zh", "elv")
         val languages = listOf("English", "Italiano", "Deutsch", "Français", "Türkçe", "العربية", "Español", "हिंदी", "日本語", "한국어", "Русский", "简体中文", "Elvish")
-        val langPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val langPrefs = getSharedPreferences(ThemeUtils.PREFS_NAME, MODE_PRIVATE)
         val savedLang = langPrefs.getString("app_language", "en")
 
         val langAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
         langAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.languageSpinner?.adapter = langAdapter
+        binding.languageSpinner.adapter = langAdapter
 
         val savedIndex = languageCodes.indexOf(savedLang)
         if (savedIndex != -1) {
-            binding.languageSpinner?.setSelection(savedIndex)
+            binding.languageSpinner.setSelection(savedIndex)
         }
 
-        binding.languageSpinner?.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+        binding.languageSpinner.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedLangCode = languageCodes[position]
                 if (selectedLangCode != savedLang) {
@@ -123,11 +121,8 @@ class MainActivity : AppCompatActivity() {
                     recreate()
                 }
             }
-
             override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
         }
-
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -195,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                         val estPriceA = valueB * areaA
                         binding.inputPriceA.hint = "%.2f".format(estPriceA)
                     } else {
-                        binding.inputPriceA.hint = getString(R.string.enter_price) //A
+                        binding.inputPriceA.hint = getString(R.string.enter_price)
                     }
                 }
             }
@@ -205,7 +200,7 @@ class MainActivity : AppCompatActivity() {
                         val estPriceB = valueA * areaB
                         binding.inputPriceB.hint = "%.2f".format(estPriceB)
                     } else {
-                        binding.inputPriceB.hint = getString(R.string.enter_price) //B
+                        binding.inputPriceB.hint = getString(R.string.enter_price)
                     }
                 }
             }
@@ -218,11 +213,11 @@ class MainActivity : AppCompatActivity() {
                         val priceA = binding.inputPriceA.text.toString().toDouble()
                         val priceB = binding.inputPriceB.text.toString().toDouble()
                         val sizeB = binding.inputSizeB.text.toString().toDouble()
-                        val areaBLocal = computeArea(sizeB, isRadius)
+                        val areaBLocal = computeArea(sizeB, this.isRadius)
                         val valueBLocal = priceB / areaBLocal
                         val estAreaA = if (valueBLocal > 0) priceA / valueBLocal else null
                         val estSizeA = estAreaA?.let {
-                            if (isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
+                            if (this.isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
                         }
                         binding.inputSizeA.hint = estSizeA?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
@@ -239,11 +234,11 @@ class MainActivity : AppCompatActivity() {
                         val priceA = binding.inputPriceA.text.toString().toDouble()
                         val priceB = binding.inputPriceB.text.toString().toDouble()
                         val sizeA = binding.inputSizeA.text.toString().toDouble()
-                        val areaALocal = computeArea(sizeA, isRadius)
+                        val areaALocal = computeArea(sizeA, this.isRadius)
                         val valueALocal = priceA / areaALocal
                         val estAreaB = if (valueALocal > 0) priceB / valueALocal else null
                         val estSizeB = estAreaB?.let {
-                            if (isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
+                            if (this.isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
                         }
                         binding.inputSizeB.hint = estSizeB?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
@@ -261,16 +256,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun updatePizzaView(areaA: Double?, areaB: Double?) {
         if (areaA != null && areaB != null) {
+            if (areaA == 0.0 && areaB == 0.0) return
             if (areaA > areaB) {
                 val scaleA = 1f
-                val scaleB = sqrt(areaB / areaA).toFloat()
+                val scaleB = if (areaA > 0) sqrt(areaB / areaA).toFloat() else 0f
                 binding.pizzaA.scaleX = scaleA
                 binding.pizzaA.scaleY = scaleA
                 binding.pizzaB.scaleX = scaleB
                 binding.pizzaB.scaleY = scaleB
             } else {
                 val scaleB = 1f
-                val scaleA = sqrt(areaA / areaB).toFloat()
+                val scaleA = if (areaB > 0) sqrt(areaA / areaB).toFloat() else 0f
                 binding.pizzaA.scaleX = scaleA
                 binding.pizzaA.scaleY = scaleA
                 binding.pizzaB.scaleX = scaleB
@@ -285,14 +281,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     object ThemeUtils {
-        private const val KEY_THEME = "theme_preference"
+        const val PREFS_NAME = "pvc_settings"
+        const val KEY_THEME = "theme_preference"
 
         const val THEME_SYSTEM = "default"
         const val THEME_LIGHT = "light"
         const val THEME_DARK = "dark"
+        fun initializeDayNightMode(context: Context) {
+            val prefs = context.getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
+            val selectedTheme = prefs.getString(KEY_THEME, THEME_SYSTEM) ?: THEME_SYSTEM
 
-        fun applyTheme(activity: AppCompatActivity) {
-            val prefs = activity.getSharedPreferences("pvc_settings", MODE_PRIVATE)
+            val nightMode = when (selectedTheme) {
+                THEME_LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+                THEME_DARK -> AppCompatDelegate.MODE_NIGHT_YES
+                else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            }
+            AppCompatDelegate.setDefaultNightMode(nightMode)
+        }
+
+        fun applyThemeChangeAndRecreate(activity: AppCompatActivity) {
+            val prefs = activity.getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
             val selectedTheme = prefs.getString(KEY_THEME, THEME_SYSTEM) ?: THEME_SYSTEM
 
             val newMode = when (selectedTheme) {
@@ -300,19 +308,15 @@ class MainActivity : AppCompatActivity() {
                 THEME_DARK -> AppCompatDelegate.MODE_NIGHT_YES
                 else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             }
-
-            val lastMode = prefs.getInt("last_mode_applied", -1)
-
-            if (lastMode != newMode) {
-                prefs.edit { putInt("last_mode_applied", newMode) }
-                AppCompatDelegate.setDefaultNightMode(newMode)
-                activity.recreate()
-            }
+            AppCompatDelegate.setDefaultNightMode(newMode)
+            activity.recreate()
         }
     }
 }
 
 object LocaleUtils {
+    private const val PREFS_NAME = "pvc_settings"
+
     fun setLocale(context: Context, language: String): Context {
         val locale = Locale(language)
         Locale.setDefault(locale)
@@ -324,7 +328,7 @@ object LocaleUtils {
     }
 
     fun applySavedLocale(base: Context): Context {
-        val prefs = base.getSharedPreferences("pvc_settings", Context.MODE_PRIVATE)
+        val prefs = base.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val langCode = prefs.getString("app_language", "en") ?: "en"
         return setLocale(base, langCode)
     }
