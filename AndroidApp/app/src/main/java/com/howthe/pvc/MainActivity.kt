@@ -129,6 +129,14 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
     }
 
+    override fun onBackPressed() {
+        if (binding.settingsMenu.visibility == View.VISIBLE) {
+            binding.settingsMenu.visibility = View.GONE
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     val isRadius = true
     private fun recalculate() {
         if (isUpdatingProgrammatically) return
