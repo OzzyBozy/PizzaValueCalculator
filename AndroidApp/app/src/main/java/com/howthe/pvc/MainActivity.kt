@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var isUpdatingProgrammatically = false
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.initializeDayNightMode(this)
 
@@ -116,7 +115,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedLangCode = languageCodes[position]
                 if (selectedLangCode != savedLang) {
-                    langPrefs.edit() { putString("app_language", selectedLangCode) }
+                    langPrefs.edit { putString("app_language", selectedLangCode) }
                     LocaleUtils.setLocale(this@MainActivity, selectedLangCode)
                     recreate()
                 }
