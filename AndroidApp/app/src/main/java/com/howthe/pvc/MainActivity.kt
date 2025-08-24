@@ -19,6 +19,9 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import androidx.core.content.edit
 import android.content.Context
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -122,19 +125,23 @@ class MainActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.settingsMenu.isVisible) {
+                    binding.settingsMenu.isGone = true
+                } else {
+                    isEnabled = false
+                    this@MainActivity.onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
-    }
-
-    override fun onBackPressed() {
-        if (binding.settingsMenu.visibility == View.VISIBLE) {
-            binding.settingsMenu.visibility = View.GONE
-        } else {
-            super.onBackPressed()
-        }
     }
 
     val isRadius = true
