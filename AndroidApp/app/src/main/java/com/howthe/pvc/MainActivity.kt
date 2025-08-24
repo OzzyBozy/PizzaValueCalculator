@@ -155,7 +155,6 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
     }
 
-    val isRadius = true
     private fun recalculate() {
         if (isUpdatingProgrammatically) return
         isUpdatingProgrammatically = true
@@ -165,8 +164,8 @@ class MainActivity : AppCompatActivity() {
         val sizeB = binding.inputSizeB.text.toString().toDoubleOrNull()
         val priceB = binding.inputPriceB.text.toString().toDoubleOrNull()
 
-        val areaA = sizeA?.let { computeArea(it, isRadius) }
-        val areaB = sizeB?.let { computeArea(it, isRadius) }
+        val areaA = sizeA?.let { computeArea(it) }
+        val areaB = sizeB?.let { computeArea(it) }
 
         val valueA = if (areaA != null && priceA != null) priceA / areaA else null
         val valueB = if (areaB != null && priceB != null) priceB / areaB else null
@@ -237,12 +236,10 @@ class MainActivity : AppCompatActivity() {
                         val priceA = binding.inputPriceA.text.toString().toDouble()
                         val priceB = binding.inputPriceB.text.toString().toDouble()
                         val sizeB = binding.inputSizeB.text.toString().toDouble()
-                        val areaBLocal = computeArea(sizeB, this.isRadius)
+                        val areaBLocal = computeArea(sizeB)
                         val valueBLocal = priceB / areaBLocal
                         val estAreaA = if (valueBLocal > 0) priceA / valueBLocal else null
-                        val estSizeA = estAreaA?.let {
-                            if (this.isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
-                        }
+                        val estSizeA = estAreaA?.let { sqrt(it / PI) }
                         binding.inputSizeA.hint = estSizeA?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
                         binding.inputSizeA.hint = getString(R.string.enter_size)
@@ -258,12 +255,10 @@ class MainActivity : AppCompatActivity() {
                         val priceA = binding.inputPriceA.text.toString().toDouble()
                         val priceB = binding.inputPriceB.text.toString().toDouble()
                         val sizeA = binding.inputSizeA.text.toString().toDouble()
-                        val areaALocal = computeArea(sizeA, this.isRadius)
+                        val areaALocal = computeArea(sizeA)
                         val valueALocal = priceA / areaALocal
                         val estAreaB = if (valueALocal > 0) priceB / valueALocal else null
-                        val estSizeB = estAreaB?.let {
-                            if (this.isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
-                        }
+                        val estSizeB = estAreaB?.let { sqrt(it / PI) }
                         binding.inputSizeB.hint = estSizeB?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
                         binding.inputSizeB.hint = getString(R.string.enter_size)
@@ -273,9 +268,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun computeArea(value: Double, isRadius: Boolean): Double {
-        val radius = if (isRadius) value else value / 2.0
-        return PI * radius.pow(2.0)
+    private fun computeArea(value: Double): Double {
+        return PI * value.pow(2.0)
     }
 
     private fun updatePizzaView(areaA: Double?, areaB: Double?) {
