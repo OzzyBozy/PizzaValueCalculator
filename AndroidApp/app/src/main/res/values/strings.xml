@@ -15,4 +15,8 @@
     <string name="better_pizza2">is</string>
     <string name="better_pizza3">% better value</string>
     <string name="elv">pvc</string>
+    <string name="advanced_mode">Advanced mode</string>
+    <string name="slices_left">Slices left</string>
+    <string name="slices_left_A">Slices left A:</string>
+    <string name="slices_left_B">Slices left B:</string>
 </resources>

@@ -60,7 +60,6 @@
                         app:srcCompat="@drawable/settings"/>
                 </LinearLayout>
 
-                <!-- Pizza A and B Container -->
                 <LinearLayout
                     android:id="@+id/pizzaContainer"
                     android:orientation="horizontal"
@@ -69,7 +68,6 @@
                     android:gravity="center_horizontal"
                     android:weightSum="2">
 
-                    <!-- Pizza A -->
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_weight="1"
@@ -86,7 +84,6 @@
 
                         <Space android:layout_width="match_parent" android:layout_height="8dp" />
 
-                        <!-- Size A -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -117,7 +114,6 @@
 
                         <Space android:layout_width="match_parent" android:layout_height="6dp" />
 
-                        <!-- Price A -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -147,7 +143,6 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Pizza B -->
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_weight="1"
@@ -164,7 +159,6 @@
 
                         <Space android:layout_width="match_parent" android:layout_height="8dp" />
 
-                        <!-- Size B -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -195,7 +189,6 @@
 
                         <Space android:layout_width="match_parent" android:layout_height="6dp"/>
 
-                        <!-- Price B -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -229,9 +222,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Settings menu overlay -->
     <ScrollView
-        android:id="@+id/settingsMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -240,7 +231,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="96dp"
         android:layout_marginBottom="16dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:id="@+id/settingsMenu">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -258,7 +250,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/settings"
                     android:textAlignment="center"
-                    android:textColor="?attr/pvcText"
+                    android:textColor="?attr/pvcBoxText"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"/>
@@ -276,7 +268,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="4dp"
                 android:background="?attr/pvcBoxBorder"
                 android:layout_margin="8dp"/>
 
@@ -285,7 +277,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingVertical="12dp">
+                android:paddingBottom="4dp">
 
                 <TextView
                     android:id="@+id/themeText"
@@ -308,7 +300,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingBottom="4dp">
 
                 <TextView
                     android:id="@+id/languageText"
@@ -328,6 +321,99 @@
                     android:paddingVertical="4dp"
                     android:paddingStart="2dp"
                     android:spinnerMode="dropdown"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/advancedText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/advanced_mode"
+                    android:textSize="16sp"
+                    android:textColor="?attr/pvcBoxText" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/advancedSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:thumbTint="?attr/pvcBoxBorder"
+                    app:trackTint="?attr/pvcBackground" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:id="@+id/advancedSettingsLayout"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="4dp">
+
+                    <TextView
+                        android:id="@+id/sizeSeekTextA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/slices_left_A"
+                        android:textSize="16sp"
+                        android:textColor="?attr/pvcBoxText" />
+
+                    <TextView
+                        android:id="@+id/seekValueA"
+                        android:layout_width="16dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/pvcBoxText"/>
+
+                    <SeekBar
+                        android:id="@+id/sliceSeekA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="11"
+                        android:progress="11"
+                        android:thumbTint="?attr/pvcBoxBorder"
+                        android:progressTint="?attr/pvcBackground"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="4dp">
+
+                    <TextView
+                        android:id="@+id/sizeSeekTextB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/slices_left_B"
+                        android:textSize="16sp"
+                        android:textColor="?attr/pvcBoxText" />
+
+                    <TextView
+                        android:id="@+id/seekValueB"
+                        android:layout_width="16dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/pvcBoxText"/>
+
+                    <SeekBar
+                        android:id="@+id/sliceSeekB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="11"
+                        android:progress="11"
+                        android:thumbTint="?attr/pvcBoxBorder"
+                        android:progressTint="?attr/pvcBackground"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

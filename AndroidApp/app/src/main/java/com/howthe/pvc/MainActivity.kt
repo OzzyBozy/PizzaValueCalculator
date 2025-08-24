@@ -60,6 +60,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val advancedSwitch = binding.advancedSwitch
+        val advancedSettingsLayout = binding.advancedSettingsLayout
+        val isAdvancedMode = prefs.getBoolean(ThemeUtils.KEY_ADVANCED_MODE, false) // Default to false
+        advancedSwitch.isChecked = isAdvancedMode
+        advancedSettingsLayout.visibility = if (isAdvancedMode) View.VISIBLE else View.GONE
+
+        advancedSwitch.setOnCheckedChangeListener { _, isChecked ->
+            advancedSettingsLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
+            prefs.edit { putBoolean(ThemeUtils.KEY_ADVANCED_MODE, isChecked) }
+        }
+
         val priceInputs = listOf(binding.inputPriceA, binding.inputPriceB)
         val sizeInputs = listOf(binding.inputSizeA, binding.inputSizeB)
 
@@ -296,6 +307,7 @@ class MainActivity : AppCompatActivity() {
     object ThemeUtils {
         const val PREFS_NAME = "pvc_settings"
         const val KEY_THEME = "theme_preference"
+        const val KEY_ADVANCED_MODE = "advanced_mode_preference"
 
         const val THEME_SYSTEM = "default"
         const val THEME_LIGHT = "light"
