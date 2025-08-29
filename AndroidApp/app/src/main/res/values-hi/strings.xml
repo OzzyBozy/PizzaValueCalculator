@@ -14,4 +14,7 @@
     <string name="enter_price">कीमत दर्ज करें</string>
     <string name="dark_mode">डार्क मोड</string>
     <string name="equal_value">दोनों पिज़्ज़ा का मूल्य समान है</string>
+    <string name="advanced_mode">उन्नत मोड</string>
+    <string name="slices_left_A">बचे हुए स्लाइस A:</string>
+    <string name="slices_left_B">बचे हुए स्लाइस B:</string>
 </resources>

@@ -14,4 +14,7 @@
     <string name="enter_price">Εισάγετε τιμή</string>
     <string name="dark_mode">Σκούρο θέμα</string>
     <string name="equal_value">Και οι δύο πίτσες έχουν την ίδια αξία</string>
+    <string name="advanced_mode">Προηγμένη λειτουργία</string>
+    <string name="slices_left_A">Εναπομείναντα κομμάτια Α:</string>
+    <string name="slices_left_B">Εναπομείναντα κομμάτια Β:</string>
 </resources>

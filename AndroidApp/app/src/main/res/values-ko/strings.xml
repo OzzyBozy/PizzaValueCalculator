@@ -13,4 +13,7 @@
     <string name="dark_mode">다크 모드</string>
     <string name="equal_value">두 피자의 가치는 같습니다</string>
     <string name="better_pizza3">% 더 나은 가치</string>
+    <string name="advanced_mode">고급 모드</string>
+    <string name="slices_left_A">남은 조각 A:</string>
+    <string name="slices_left_B">남은 조각 B:</string>
 </resources>

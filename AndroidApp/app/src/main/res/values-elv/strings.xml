@@ -14,4 +14,7 @@
     <string name="dark_mode">Mornë Tyelë</string>
     <string name="equal_value">I atarwa cormar nauvar equë</string>
     <string name="better_pizza3">% alya nauva</string>
+    <string name="advanced_mode">Istyar Mólë</string>
+    <string name="slices_left_A">Telperiën A:</string>
+    <string name="slices_left_B">Telperiën B:</string>
 </resources>

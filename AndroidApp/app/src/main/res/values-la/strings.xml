@@ -14,4 +14,7 @@
     <string name="enter_price">Pretium inserere</string>
     <string name="dark_mode">Modus obscurus</string>
     <string name="equal_value">Utraque pizza aequum valorem habet</string>
+    <string name="advanced_mode">Modus provectus</string>
+    <string name="slices_left_A">Segmenta relicta A:</string>
+    <string name="slices_left_B">Segmenta relicta B:</string>
 </resources>

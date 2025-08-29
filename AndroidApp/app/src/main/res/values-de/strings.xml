@@ -14,4 +14,7 @@
     <string name="better_pizza1">"Pizza "</string>
     <string name="better_pizza2">" hat "</string>
     <string name="better_pizza3">% mehr Wert</string>
+    <string name="advanced_mode">Erweiterter Modus</string>
+    <string name="slices_left_A">Verbleibende Scheiben A:</string>
+    <string name="slices_left_B">Verbleibende Scheiben B:</string>
 </resources>

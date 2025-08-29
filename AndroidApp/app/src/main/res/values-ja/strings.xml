@@ -14,4 +14,7 @@
     <string name="enter_price">価格を入力</string>
     <string name="dark_mode">ダークモード</string>
     <string name="equal_value">両方のピザは同じ価値です</string>
+    <string name="advanced_mode">詳細モード</string>
+    <string name="slices_left_A">残りのスライス A:</string>
+    <string name="slices_left_B">残りのスライス B:</string>
 </resources>

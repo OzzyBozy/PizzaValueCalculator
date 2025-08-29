@@ -14,4 +14,7 @@
     <string name="better_pizza1">"La pizza "</string>
     <string name="better_pizza2">" a un meilleur rapport qualité-prix de "</string>
     <string name="better_pizza3">%</string>
+    <string name="advanced_mode">Mode avancé</string>
+    <string name="slices_left_A">Tranches restantes A :</string>
+    <string name="slices_left_B">Tranches restantes B :</string>
 </resources>

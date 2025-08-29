@@ -14,4 +14,7 @@
     <string name="enter_price">输入价格</string>
     <string name="dark_mode">深色模式</string>
     <string name="equal_value">两种披萨价值相等</string>
+    <string name="advanced_mode">高级模式</string>
+    <string name="slices_left_A">剩余切片 A:</string>
+    <string name="slices_left_B">剩余切片 B:</string>
 </resources>

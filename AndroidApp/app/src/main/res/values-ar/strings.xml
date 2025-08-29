@@ -14,4 +14,7 @@
     <string name="enter_price">أدخل السعر</string>
     <string name="dark_mode">الوضع الداكن</string>
     <string name="equal_value">كلا البيتزتين لهما نفس القيمة</string>
+    <string name="advanced_mode">الوضع المتقدم</string>
+    <string name="slices_left_A">الشرائح المتبقية أ:</string>
+    <string name="slices_left_B">الشرائح المتبقية ب:</string>
 </resources>
