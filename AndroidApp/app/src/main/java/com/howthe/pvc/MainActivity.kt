@@ -6,6 +6,7 @@
 package com.howthe.pvc
 
 import android.content.res.Configuration
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,20 +20,31 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import androidx.core.content.edit
 import android.content.Context
+import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import java.util.*
+import android.widget.SeekBar
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var isUpdatingProgrammatically = false
+    private var sliceAValue: Double = 1.0
+    private var sliceBValue: Double = 1.0
 
-
+    private val seekBarLabels = listOf("1/18", "1/9", "1/6", "2/9", "5/18", "2/6", "7/18", "4/9", "3/6", "5/9", "11/18", "4/6", "13/18", "7/9", "5/6", "8/9", "17/18", "18/18")
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.initializeDayNightMode(this)
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.pizzaA.foreground = ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
+        binding.pizzaB.foreground = ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
 
         if (savedInstanceState != null) {
             val visibility = savedInstanceState.getInt("settingsMenuVisibility", View.GONE)
@@ -57,6 +69,58 @@ class MainActivity : AppCompatActivity() {
                 darkModeSwitch.isChecked = (uiModeNight == Configuration.UI_MODE_NIGHT_YES)
             }
         }
+
+        val advancedSwitch = binding.advancedSwitch
+        val advancedSettingsLayout = binding.advancedSettingsLayout
+        val isAdvancedMode = prefs.getBoolean(ThemeUtils.KEY_ADVANCED_MODE, false)
+        advancedSwitch.isChecked = isAdvancedMode
+        advancedSettingsLayout.visibility = if (isAdvancedMode) View.VISIBLE else View.GONE
+
+        advancedSwitch.setOnCheckedChangeListener { _, isChecked ->
+            advancedSettingsLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
+            prefs.edit { putBoolean(ThemeUtils.KEY_ADVANCED_MODE, isChecked) }
+        }
+
+        val sliceSeekBarA = binding.sliceSeekBarA
+        val sliceTextViewA = binding.sliceSeekBarAValue
+        sliceSeekBarA!!.max = 17
+        val savedSliceAProgress = 18
+        sliceSeekBarA.progress = savedSliceAProgress - 1
+        updateSliceValueAndText(savedSliceAProgress, sliceTextViewA!!, true)
+
+        sliceSeekBarA.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, currentProgress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    val actualProgress = currentProgress + 1
+                    updateSliceValueAndText(actualProgress, sliceTextViewA, true)
+                    if (binding.inputSizeA.text.isNotBlank() && binding.inputSizeB.text.isNotBlank()) {
+                        recalculate()
+                    }
+
+                }
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        val sliceSeekBarB = binding.sliceSeekBarB
+        val sliceTextViewB = binding.sliceSeekBarBValue
+        sliceSeekBarB!!.max = 17
+        val savedSliceBProgress = 18
+        sliceSeekBarB.progress = savedSliceBProgress - 1
+        updateSliceValueAndText(savedSliceBProgress, sliceTextViewB!!, false)
+
+        sliceSeekBarB.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, currentProgress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    val actualProgress = currentProgress + 1
+                    updateSliceValueAndText(actualProgress, sliceTextViewB, false)
+                    recalculate()
+                }
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
 
         val priceInputs = listOf(binding.inputPriceA, binding.inputPriceB)
         val sizeInputs = listOf(binding.inputSizeA, binding.inputSizeB)
@@ -116,13 +180,25 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedLangCode = languageCodes[position]
                 if (selectedLangCode != savedLang) {
-                    langPrefs.edit() { putString("app_language", selectedLangCode) }
+                    langPrefs.edit { putString("app_language", selectedLangCode) }
                     LocaleUtils.setLocale(this@MainActivity, selectedLangCode)
                     recreate()
                 }
             }
             override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.settingsMenu.isVisible) {
+                    binding.settingsMenu.isGone = true
+                } else {
+                    isEnabled = false
+                    this@MainActivity.onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -130,7 +206,29 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
     }
 
-    val isRadius = true
+    private fun updateSliceValueAndText(progress: Int, textView: TextView, isPizzaA: Boolean) {
+        val normalizedValue = progress / 18.0
+        if (isPizzaA) {
+            sliceAValue = normalizedValue
+        } else {
+            sliceBValue = normalizedValue
+        }
+        if (progress in 1..seekBarLabels.size) {
+            textView.text = seekBarLabels[progress - 1]
+        }
+
+        val pizzaView = if (isPizzaA) binding.pizzaA else binding.pizzaB
+        val overlayDrawable = pizzaView.foreground as? LayerDrawable
+        overlayDrawable?.let {
+            val totalSlices = it.numberOfLayers
+            for (i in 0 until totalSlices) {
+                val slice = it.getDrawable(i)
+                slice.alpha = if (i < totalSlices - progress) 255 else 0
+            }
+        }
+    }
+
+
     private fun recalculate() {
         if (isUpdatingProgrammatically) return
         isUpdatingProgrammatically = true
@@ -140,11 +238,14 @@ class MainActivity : AppCompatActivity() {
         val sizeB = binding.inputSizeB.text.toString().toDoubleOrNull()
         val priceB = binding.inputPriceB.text.toString().toDoubleOrNull()
 
-        val areaA = sizeA?.let { computeArea(it, isRadius) }
-        val areaB = sizeB?.let { computeArea(it, isRadius) }
+        val rawAreaA = sizeA?.let { computeArea(it) }
+        val rawAreaB = sizeB?.let { computeArea(it) }
 
-        val valueA = if (areaA != null && priceA != null) priceA / areaA else null
-        val valueB = if (areaB != null && priceB != null) priceB / areaB else null
+        val areaA = rawAreaA?.let { it * sliceAValue }
+        val areaB = rawAreaB?.let { it * sliceBValue }
+
+        val valueA = if (areaA != null && priceA != null && areaA > 0.0) priceA / areaA else null
+        val valueB = if (areaB != null && priceB != null && areaB > 0.0) priceB / areaB else null
 
         listOf(
             binding.inputPriceA,
@@ -156,7 +257,7 @@ class MainActivity : AppCompatActivity() {
                 updateHintFor(input, valueA, valueB, areaA, areaB)
             }
         }
-        updatePizzaView(areaA, areaB)
+        updatePizzaView(rawAreaA, rawAreaB)
 
         if (valueA != null && valueB != null) {
             val epsilon = 0.0001
@@ -185,7 +286,7 @@ class MainActivity : AppCompatActivity() {
         when (input) {
             binding.inputPriceA -> {
                 if (binding.inputPriceA.text.isNullOrBlank()) {
-                    if (valueB != null && areaA != null) {
+                    if (valueB != null && areaA != null && areaA > 0.0) {
                         val estPriceA = valueB * areaA
                         binding.inputPriceA.hint = "%.2f".format(estPriceA)
                     } else {
@@ -195,7 +296,7 @@ class MainActivity : AppCompatActivity() {
             }
             binding.inputPriceB -> {
                 if (binding.inputPriceB.text.isNullOrBlank()) {
-                    if (valueA != null && areaB != null) {
+                    if (valueA != null && areaB != null && areaB > 0.0) {
                         val estPriceB = valueA * areaB
                         binding.inputPriceB.hint = "%.2f".format(estPriceB)
                     } else {
@@ -209,16 +310,26 @@ class MainActivity : AppCompatActivity() {
                         binding.inputPriceB.text.toString().toDoubleOrNull() != null &&
                         binding.inputSizeB.text.toString().toDoubleOrNull() != null
                     ) {
-                        val priceA = binding.inputPriceA.text.toString().toDouble()
-                        val priceB = binding.inputPriceB.text.toString().toDouble()
-                        val sizeB = binding.inputSizeB.text.toString().toDouble()
-                        val areaBLocal = computeArea(sizeB, this.isRadius)
-                        val valueBLocal = priceB / areaBLocal
-                        val estAreaA = if (valueBLocal > 0) priceA / valueBLocal else null
-                        val estSizeA = estAreaA?.let {
-                            if (this.isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
+                        val priceAVal = binding.inputPriceA.text.toString().toDouble()
+                        val priceBVal = binding.inputPriceB.text.toString().toDouble()
+                        val sizeBVal = binding.inputSizeB.text.toString().toDouble()
+                        
+                        val rawAreaBLocal = computeArea(sizeBVal)
+                        val areaBLocal = rawAreaBLocal * sliceBValue
+                        
+                        if (areaBLocal > 0) {
+                            val valueBLocal = priceBVal / areaBLocal
+                            if (valueBLocal > 0) {
+                                val targetAreaA = priceAVal / valueBLocal
+                                val estRawAreaA = targetAreaA / sliceAValue
+                                val estSizeA = sqrt(estRawAreaA / PI)
+                                binding.inputSizeA.hint = "%.2f".format(estSizeA)
+                            } else {
+                                 binding.inputSizeA.hint = getString(R.string.enter_size)
+                            }
+                        } else {
+                             binding.inputSizeA.hint = getString(R.string.enter_size)
                         }
-                        binding.inputSizeA.hint = estSizeA?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
                         binding.inputSizeA.hint = getString(R.string.enter_size)
                     }
@@ -230,16 +341,26 @@ class MainActivity : AppCompatActivity() {
                         binding.inputPriceB.text.toString().toDoubleOrNull() != null &&
                         binding.inputSizeA.text.toString().toDoubleOrNull() != null
                     ) {
-                        val priceA = binding.inputPriceA.text.toString().toDouble()
-                        val priceB = binding.inputPriceB.text.toString().toDouble()
-                        val sizeA = binding.inputSizeA.text.toString().toDouble()
-                        val areaALocal = computeArea(sizeA, this.isRadius)
-                        val valueALocal = priceA / areaALocal
-                        val estAreaB = if (valueALocal > 0) priceB / valueALocal else null
-                        val estSizeB = estAreaB?.let {
-                            if (this.isRadius) sqrt(it / PI) else 2 * sqrt(it / PI)
+                        val priceAVal = binding.inputPriceA.text.toString().toDouble()
+                        val priceBVal = binding.inputPriceB.text.toString().toDouble()
+                        val sizeAVal = binding.inputSizeA.text.toString().toDouble()
+
+                        val rawAreaALocal = computeArea(sizeAVal)
+                        val areaALocal = rawAreaALocal * sliceAValue
+
+                        if (areaALocal > 0) {
+                            val valueALocal = priceAVal / areaALocal
+                            if (valueALocal > 0) {
+                                val targetAreaB = priceBVal / valueALocal
+                                val estRawAreaB = targetAreaB / sliceBValue
+                                val estSizeB = sqrt(estRawAreaB / PI)
+                                binding.inputSizeB.hint = "%.2f".format(estSizeB)
+                            } else {
+                                binding.inputSizeB.hint = getString(R.string.enter_size)
+                            }
+                        } else {
+                            binding.inputSizeB.hint = getString(R.string.enter_size)
                         }
-                        binding.inputSizeB.hint = estSizeB?.let { "%.2f".format(it) } ?: getString(R.string.enter_size)
                     } else {
                         binding.inputSizeB.hint = getString(R.string.enter_size)
                     }
@@ -248,29 +369,49 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun computeArea(value: Double, isRadius: Boolean): Double {
-        val radius = if (isRadius) value else value / 2.0
-        return PI * radius.pow(2.0)
+    private fun computeArea(value: Double): Double {
+        return PI * value.pow(2.0)
     }
 
-    private fun updatePizzaView(areaA: Double?, areaB: Double?) {
-        if (areaA != null && areaB != null) {
-            if (areaA == 0.0 && areaB == 0.0) return
-            if (areaA > areaB) {
+    private fun updatePizzaView(rawAreaA: Double?, rawAreaB: Double?) {
+        if (rawAreaA != null && rawAreaB != null) {
+            if (rawAreaA == 0.0 && rawAreaB == 0.0) {
+                 binding.pizzaA.scaleX = 1f
+                 binding.pizzaA.scaleY = 1f
+                 binding.pizzaB.scaleX = 1f
+                 binding.pizzaB.scaleY = 1f
+                 return
+            }
+            if (rawAreaA > rawAreaB) {
                 val scaleA = 1f
-                val scaleB = if (areaA > 0) sqrt(areaB / areaA).toFloat() else 0f
+                val scaleB = if (rawAreaA > 0) sqrt(rawAreaB / rawAreaA).toFloat() else 1f
                 binding.pizzaA.scaleX = scaleA
                 binding.pizzaA.scaleY = scaleA
                 binding.pizzaB.scaleX = scaleB
                 binding.pizzaB.scaleY = scaleB
             } else {
                 val scaleB = 1f
-                val scaleA = if (areaB > 0) sqrt(areaA / areaB).toFloat() else 0f
+                val scaleA = if (rawAreaB > 0) sqrt(rawAreaA / rawAreaB).toFloat() else 1f
                 binding.pizzaA.scaleX = scaleA
                 binding.pizzaA.scaleY = scaleA
                 binding.pizzaB.scaleX = scaleB
                 binding.pizzaB.scaleY = scaleB
             }
+        } else if (rawAreaA != null) {
+            binding.pizzaA.scaleX = 1f
+            binding.pizzaA.scaleY = 1f
+            binding.pizzaB.scaleX = 1f
+            binding.pizzaB.scaleY = 1f
+        } else if (rawAreaB != null) {
+            binding.pizzaA.scaleX = 1f
+            binding.pizzaA.scaleY = 1f
+            binding.pizzaB.scaleX = 1f
+            binding.pizzaB.scaleY = 1f
+        } else {
+            binding.pizzaA.scaleX = 1f
+            binding.pizzaA.scaleY = 1f
+            binding.pizzaB.scaleX = 1f
+            binding.pizzaB.scaleY = 1f
         }
     }
 
@@ -282,6 +423,7 @@ class MainActivity : AppCompatActivity() {
     object ThemeUtils {
         const val PREFS_NAME = "pvc_settings"
         const val KEY_THEME = "theme_preference"
+        const val KEY_ADVANCED_MODE = "advanced_mode_preference"
 
         const val THEME_SYSTEM = "default"
         const val THEME_LIGHT = "light"

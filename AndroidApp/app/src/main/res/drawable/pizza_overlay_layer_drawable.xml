@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="0" android:toDegrees="0" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="20" android:toDegrees="20" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="40" android:toDegrees="40" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="60" android:toDegrees="60" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="80" android:toDegrees="80" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="100" android:toDegrees="100" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="120" android:toDegrees="120" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="140" android:toDegrees="140" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="160" android:toDegrees="160" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="180" android:toDegrees="180" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="200" android:toDegrees="200" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="220" android:toDegrees="220" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="240" android:toDegrees="240" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="260" android:toDegrees="260" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="280" android:toDegrees="280" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="300" android:toDegrees="300" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="320" android:toDegrees="320" android:pivotX="50%" android:pivotY="50%" /></item>
+    <item><rotate android:drawable="@drawable/ic_pizza_wedge" android:fromDegrees="340" android:toDegrees="340" android:pivotX="50%" android:pivotY="50%" /></item>
+</layer-list>
