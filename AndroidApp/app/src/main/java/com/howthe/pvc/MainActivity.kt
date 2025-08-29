@@ -6,6 +6,7 @@
 package com.howthe.pvc
 
 import android.content.res.Configuration
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +21,7 @@ import kotlin.math.sqrt
 import androidx.core.content.edit
 import android.content.Context
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import java.util.*
@@ -40,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.pizzaA.foreground = ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
+        binding.pizzaB.foreground = ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
 
         if (savedInstanceState != null) {
             val visibility = savedInstanceState.getInt("settingsMenuVisibility", View.GONE)
@@ -210,6 +215,16 @@ class MainActivity : AppCompatActivity() {
         }
         if (progress in 1..seekBarLabels.size) {
             textView.text = seekBarLabels[progress - 1]
+        }
+
+        val pizzaView = if (isPizzaA) binding.pizzaA else binding.pizzaB
+        val overlayDrawable = pizzaView.foreground as? LayerDrawable
+        overlayDrawable?.let {
+            val totalSlices = it.numberOfLayers
+            for (i in 0 until totalSlices) {
+                val slice = it.getDrawable(i)
+                slice.alpha = if (i < totalSlices - progress) 255 else 0
+            }
         }
     }
 
