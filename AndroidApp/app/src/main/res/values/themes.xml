@@ -12,6 +12,5 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
     <style name="Theme.PVC" parent="Base.Theme.PVC" />
 </resources>

@@ -370,16 +370,17 @@
 
                     <TextView
                         android:id="@+id/seekValueA"
-                        android:layout_width="16dp"
+                        android:layout_width="48dp"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/pvcBoxText"/>
+                        android:textColor="?attr/pvcBoxText"
+                        android:paddingHorizontal="2dp"/>
 
                     <SeekBar
                         android:id="@+id/sliceSeekA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:max="11"
-                        android:progress="11"
+                        android:max="17"
+                        android:progress="17"
                         android:thumbTint="?attr/pvcBoxBorder"
                         android:progressTint="?attr/pvcBackground"/>
                 </LinearLayout>
@@ -397,20 +398,21 @@
                         android:layout_height="wrap_content"
                         android:text="@string/slices_left_B"
                         android:textSize="16sp"
-                        android:textColor="?attr/pvcBoxText" />
+                        android:textColor="?attr/pvcBoxText"/>
 
                     <TextView
                         android:id="@+id/seekValueB"
-                        android:layout_width="16dp"
+                        android:layout_width="48dp"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/pvcBoxText"/>
+                        android:textColor="?attr/pvcBoxText"
+                        android:paddingHorizontal="2dp"/>
 
                     <SeekBar
                         android:id="@+id/sliceSeekB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:max="11"
-                        android:progress="11"
+                        android:max="17"
+                        android:progress="17"
                         android:thumbTint="?attr/pvcBoxBorder"
                         android:progressTint="?attr/pvcBackground"/>
                 </LinearLayout>
