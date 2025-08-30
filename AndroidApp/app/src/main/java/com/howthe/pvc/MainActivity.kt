@@ -5,6 +5,7 @@
 
 package com.howthe.pvc
 
+import android.content.Context
 import android.content.res.Configuration
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -12,21 +13,20 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.SeekBar
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.core.content.edit
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.howthe.pvc.databinding.ActivityMainBinding
+import java.util.Locale
 import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
-import androidx.core.content.edit
-import android.content.Context
-import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
-import java.util.*
-import android.widget.SeekBar
-import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +35,27 @@ class MainActivity : AppCompatActivity() {
     private var sliceAValue: Double = 1.0
     private var sliceBValue: Double = 1.0
 
-    private val seekBarLabels = listOf("1/18", "1/9", "1/6", "2/9", "5/18", "2/6", "7/18", "4/9", "3/6", "5/9", "11/18", "4/6", "13/18", "7/9", "5/6", "8/9", "17/18", "18/18")
+    private val seekBarLabels = listOf(
+        "1/18",
+        "1/9",
+        "1/6",
+        "2/9",
+        "5/18",
+        "2/6",
+        "7/18",
+        "4/9",
+        "3/6",
+        "5/9",
+        "11/18",
+        "4/6",
+        "13/18",
+        "7/9",
+        "5/6",
+        "8/9",
+        "17/18",
+        "18/18"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.initializeDayNightMode(this)
 
@@ -43,8 +63,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.pizzaA.foreground = ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
-        binding.pizzaB.foreground = ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
+        binding.pizzaA.foreground =
+            ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
+        binding.pizzaB.foreground =
+            ContextCompat.getDrawable(this, R.drawable.pizza_overlay_layer_drawable)
 
         if (savedInstanceState != null) {
             val visibility = savedInstanceState.getInt("settingsMenuVisibility", View.GONE)
@@ -54,18 +76,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         val prefs = getSharedPreferences(ThemeUtils.PREFS_NAME, MODE_PRIVATE)
-        val currentTheme = prefs.getString(ThemeUtils.KEY_THEME, ThemeUtils.THEME_SYSTEM) ?: ThemeUtils.THEME_SYSTEM
+        val currentTheme = prefs.getString(ThemeUtils.KEY_THEME, ThemeUtils.THEME_SYSTEM)
+            ?: ThemeUtils.THEME_SYSTEM
 
         val darkModeSwitch = binding.darkModeSwitch
         when (currentTheme) {
             ThemeUtils.THEME_DARK -> {
                 darkModeSwitch.isChecked = true
             }
+
             ThemeUtils.THEME_LIGHT -> {
                 darkModeSwitch.isChecked = false
             }
+
             ThemeUtils.THEME_SYSTEM -> {
-                val uiModeNight = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                val uiModeNight =
+                    resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
                 darkModeSwitch.isChecked = (uiModeNight == Configuration.UI_MODE_NIGHT_YES)
             }
         }
@@ -79,17 +105,29 @@ class MainActivity : AppCompatActivity() {
         advancedSwitch.setOnCheckedChangeListener { _, isChecked ->
             advancedSettingsLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
             prefs.edit { putBoolean(ThemeUtils.KEY_ADVANCED_MODE, isChecked) }
+            if (!isChecked) {
+                binding.sliceSeekBarA!!.progress = 17
+                updateSliceValueAndText(18, binding.sliceSeekBarAValue!!, true)
+                binding.sliceSeekBarB!!.progress = 17
+                updateSliceValueAndText(18, binding.sliceSeekBarBValue!!, false)
+                recalculate()
+            }
         }
 
-        val sliceSeekBarA = binding.sliceSeekBarA
-        val sliceTextViewA = binding.sliceSeekBarAValue
-        sliceSeekBarA!!.max = 17
-        val savedSliceAProgress = 18
-        sliceSeekBarA.progress = savedSliceAProgress - 1
-        updateSliceValueAndText(savedSliceAProgress, sliceTextViewA!!, true)
+        val sliceSeekBarA = binding.sliceSeekBarA!!
+        val sliceTextViewA = binding.sliceSeekBarAValue!!
+        sliceSeekBarA.max = 17
+        val initialSliceAProgress = savedInstanceState?.getInt("sliceAProgress", 17) ?: 17
+        sliceSeekBarA.progress = initialSliceAProgress
+        updateSliceValueAndText(initialSliceAProgress + 1, sliceTextViewA, true)
+
 
         sliceSeekBarA.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, currentProgress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(
+                seekBar: SeekBar?,
+                currentProgress: Int,
+                fromUser: Boolean
+            ) {
                 if (fromUser) {
                     val actualProgress = currentProgress + 1
                     updateSliceValueAndText(actualProgress, sliceTextViewA, true)
@@ -99,25 +137,31 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        val sliceSeekBarB = binding.sliceSeekBarB
-        val sliceTextViewB = binding.sliceSeekBarBValue
-        sliceSeekBarB!!.max = 17
-        val savedSliceBProgress = 18
-        sliceSeekBarB.progress = savedSliceBProgress - 1
-        updateSliceValueAndText(savedSliceBProgress, sliceTextViewB!!, false)
+        val sliceSeekBarB = binding.sliceSeekBarB!!
+        val sliceTextViewB = binding.sliceSeekBarBValue!!
+        sliceSeekBarB.max = 17
+        val initialSliceBProgress = savedInstanceState?.getInt("sliceBProgress", 17) ?: 17
+        sliceSeekBarB.progress = initialSliceBProgress
+        updateSliceValueAndText(initialSliceBProgress + 1, sliceTextViewB, false)
 
         sliceSeekBarB.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, currentProgress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(
+                seekBar: SeekBar?,
+                currentProgress: Int,
+                fromUser: Boolean
+            ) {
                 if (fromUser) {
                     val actualProgress = currentProgress + 1
                     updateSliceValueAndText(actualProgress, sliceTextViewB, false)
                     recalculate()
                 }
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -138,7 +182,15 @@ class MainActivity : AppCompatActivity() {
                     if (isUpdatingProgrammatically) return
                     recalculate()
                 }
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
@@ -162,8 +214,39 @@ class MainActivity : AppCompatActivity() {
             ThemeUtils.applyThemeChangeAndRecreate(this)
         }
 
-        val languageCodes = listOf("en", "it", "de", "fr", "tr", "ar", "es", "hi", "ja", "ko", "ru", "zh", "elv")
-        val languages = listOf("English", "Italiano", "Deutsch", "Français", "Türkçe", "العربية", "Español", "हिंदी", "日本語", "한국어", "Русский", "简体中文", "Elvish")
+        val languageCodes =
+            listOf(
+                "ar",
+                "de",
+                "elv",
+                "en",
+                "es",
+                "fr",
+                "hi",
+                "it",
+                "ja",
+                "ko",
+                "la",
+                "ru",
+                "tr",
+                "zh"
+            )
+        val languages = listOf(
+            "العربية",
+            "Deutsch",
+            "Elvish",
+            "English",
+            "Español",
+            "Français",
+            " हिंदी",
+            "Italiano",
+            "日本語",
+            "한국어",
+            "Latina",
+            "Русский",
+            "Türkçe",
+            "简体中文"
+        )
         val langPrefs = getSharedPreferences(ThemeUtils.PREFS_NAME, MODE_PRIVATE)
         val savedLang = langPrefs.getString("app_language", "en")
 
@@ -176,17 +259,24 @@ class MainActivity : AppCompatActivity() {
             binding.languageSpinner.setSelection(savedIndex)
         }
 
-        binding.languageSpinner.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedLangCode = languageCodes[position]
-                if (selectedLangCode != savedLang) {
-                    langPrefs.edit { putString("app_language", selectedLangCode) }
-                    LocaleUtils.setLocale(this@MainActivity, selectedLangCode)
-                    recreate()
+        binding.languageSpinner.onItemSelectedListener =
+            object : android.widget.AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: android.widget.AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedLangCode = languageCodes[position]
+                    if (selectedLangCode != savedLang) {
+                        langPrefs.edit { putString("app_language", selectedLangCode) }
+                        LocaleUtils.setLocale(this@MainActivity, selectedLangCode)
+                        recreate()
+                    }
                 }
+
+                override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
             }
-            override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
-        }
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -204,6 +294,8 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
+        outState.putInt("sliceAProgress", binding.sliceSeekBarA!!.progress)
+        outState.putInt("sliceBProgress", binding.sliceSeekBarB!!.progress)
     }
 
     private fun updateSliceValueAndText(progress: Int, textView: TextView, isPizzaA: Boolean) {
@@ -213,9 +305,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             sliceBValue = normalizedValue
         }
-        if (progress in 1..seekBarLabels.size) {
-            textView.text = seekBarLabels[progress - 1]
+        val labelIndex = progress - 1
+        if (labelIndex in seekBarLabels.indices) {
+            textView.text = seekBarLabels[labelIndex]
         }
+
 
         val pizzaView = if (isPizzaA) binding.pizzaA else binding.pizzaB
         val overlayDrawable = pizzaView.foreground as? LayerDrawable
@@ -266,8 +360,13 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.equal_value)
             } else {
                 val better = if (diff < 0) "A" else "B"
-                val percent = ((kotlin.math.max(valueA, valueB) - kotlin.math.min(valueA, valueB)) / kotlin.math.min(valueA, valueB)) * 100
-                getString(R.string.better_pizza1) + better + getString(R.string.better_pizza2) + "%.2f".format(percent) + getString(R.string.better_pizza3)
+                val percent = ((kotlin.math.max(valueA, valueB) - kotlin.math.min(
+                    valueA,
+                    valueB
+                )) / kotlin.math.min(valueA, valueB)) * 100
+                getString(R.string.better_pizza1) + better + getString(R.string.better_pizza2) + "%.2f".format(
+                    percent
+                ) + getString(R.string.better_pizza3)
             }
         } else {
             binding.resultText.text = ""
@@ -294,6 +393,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
             binding.inputPriceB -> {
                 if (binding.inputPriceB.text.isNullOrBlank()) {
                     if (valueA != null && areaB != null && areaB > 0.0) {
@@ -304,6 +404,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
             binding.inputSizeA -> {
                 if (binding.inputSizeA.text.isNullOrBlank()) {
                     if (binding.inputPriceA.text.toString().toDoubleOrNull() != null &&
@@ -313,10 +414,10 @@ class MainActivity : AppCompatActivity() {
                         val priceAVal = binding.inputPriceA.text.toString().toDouble()
                         val priceBVal = binding.inputPriceB.text.toString().toDouble()
                         val sizeBVal = binding.inputSizeB.text.toString().toDouble()
-                        
+
                         val rawAreaBLocal = computeArea(sizeBVal)
                         val areaBLocal = rawAreaBLocal * sliceBValue
-                        
+
                         if (areaBLocal > 0) {
                             val valueBLocal = priceBVal / areaBLocal
                             if (valueBLocal > 0) {
@@ -325,16 +426,17 @@ class MainActivity : AppCompatActivity() {
                                 val estSizeA = sqrt(estRawAreaA / PI)
                                 binding.inputSizeA.hint = "%.2f".format(estSizeA)
                             } else {
-                                 binding.inputSizeA.hint = getString(R.string.enter_size)
+                                binding.inputSizeA.hint = getString(R.string.enter_size)
                             }
                         } else {
-                             binding.inputSizeA.hint = getString(R.string.enter_size)
+                            binding.inputSizeA.hint = getString(R.string.enter_size)
                         }
                     } else {
                         binding.inputSizeA.hint = getString(R.string.enter_size)
                     }
                 }
             }
+
             binding.inputSizeB -> {
                 if (binding.inputSizeB.text.isNullOrBlank()) {
                     if (binding.inputPriceA.text.toString().toDoubleOrNull() != null &&
@@ -376,11 +478,11 @@ class MainActivity : AppCompatActivity() {
     private fun updatePizzaView(rawAreaA: Double?, rawAreaB: Double?) {
         if (rawAreaA != null && rawAreaB != null) {
             if (rawAreaA == 0.0 && rawAreaB == 0.0) {
-                 binding.pizzaA.scaleX = 1f
-                 binding.pizzaA.scaleY = 1f
-                 binding.pizzaB.scaleX = 1f
-                 binding.pizzaB.scaleY = 1f
-                 return
+                binding.pizzaA.scaleX = 1f
+                binding.pizzaA.scaleY = 1f
+                binding.pizzaB.scaleX = 1f
+                binding.pizzaB.scaleY = 1f
+                return
             }
             if (rawAreaA > rawAreaB) {
                 val scaleA = 1f

@@ -15,6 +15,6 @@
     <string name="dark_mode">Modo oscuro</string>
     <string name="equal_value">Ambas pizzas tienen el mismo valor</string>
     <string name="advanced_mode">Modo avanzado</string>
-    <string name="slices_left_A">Rebanadas restantes A:</string>
-    <string name="slices_left_B">Rebanadas restantes B:</string>
+    <string name="slices_left_A">Porciones A:</string>
+    <string name="slices_left_B">Porciones B:</string>
 </resources>

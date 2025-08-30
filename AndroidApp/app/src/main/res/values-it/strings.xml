@@ -15,6 +15,6 @@
     <string name="equal_value">Entrambe le pizze hanno lo stesso valore</string>
     <string name="better_pizza3">% valore migliore</string>
     <string name="advanced_mode">Modalità avanzata</string>
-    <string name="slices_left_A">Fette rimanenti A:</string>
-    <string name="slices_left_B">Fette rimanenti B:</string>
+    <string name="slices_left_A">Fette A:</string>
+    <string name="slices_left_B">Fette B:</string>
 </resources>
