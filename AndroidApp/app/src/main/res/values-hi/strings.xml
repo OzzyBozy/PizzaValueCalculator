@@ -6,9 +6,9 @@
     <string name="price_b">कीमत B:</string>
     <string name="price_a">कीमत A:</string>
     <string name="pizzavaluecalculator">पिज़्ज़ा मूल्य कैलकुलेटर</string>
-    <string name="better_pizza1">पिज़्ज़ा </string>
-    <string name="better_pizza2"> का मूल्य बेहतर है </string>
-    <string name="better_pizza3">% अधिक मूल्य</string>
+    <string name="better_pizza1">पिज़्ज़ा </string>
+    <string name="better_pizza2"> का मूल्य </string>
+    <string name="better_pizza3">% बेहतर है</string>
     <string name="language">भाषा</string>
     <string name="enter_size">आकार दर्ज करें</string>
     <string name="enter_price">कीमत दर्ज करें</string>

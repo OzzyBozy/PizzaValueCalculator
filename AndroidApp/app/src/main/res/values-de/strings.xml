@@ -11,9 +11,9 @@
     <string name="dark_mode">Dunkelmodus</string>
     <string name="language">Sprache</string>
     <string name="equal_value">Die beiden Pizzas haben den gleichen Wert</string>
-    <string name="better_pizza1">"Pizza "</string>
-    <string name="better_pizza2">" hat "</string>
-    <string name="better_pizza3">% mehr Wert</string>
+    <string name="better_pizza1">Pizza\u00A0</string>
+    <string name="better_pizza2">\u00A0hat\u00A0</string>
+    <string name="better_pizza3">%\u00A0mehr Wert</string>
     <string name="advanced_mode">Erweiterter Modus</string>
     <string name="slices_left_A">Scheiben A:</string>
     <string name="slices_left_B">Scheiben B:</string>

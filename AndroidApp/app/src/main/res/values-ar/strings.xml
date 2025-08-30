@@ -6,9 +6,9 @@
     <string name="price_b">السعر ب:</string>
     <string name="price_a">السعر أ:</string>
     <string name="pizzavaluecalculator">حاسبة قيمة البيتزا</string>
-    <string name="better_pizza1">البيتزا </string>
-    <string name="better_pizza2"> لها قيمة أفضل </string>
-    <string name="better_pizza3">٪ أكثر قيمة</string>
+    <string name="better_pizza1">البيتزا </string>
+    <string name="better_pizza2"> هي الأفضل بنسبة </string>
+    <string name="better_pizza3"> ٪ قيمة أفضل</string>
     <string name="language">اللغة</string>
     <string name="enter_size">أدخل الحجم</string>
     <string name="enter_price">أدخل السعر</string>

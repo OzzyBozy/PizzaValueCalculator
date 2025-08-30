@@ -6,9 +6,9 @@
     <string name="price_b">Цена B:</string>
     <string name="price_a">Цена A:</string>
     <string name="pizzavaluecalculator">Калькулятор Ценности Пиццы</string>
-    <string name="better_pizza1">Пицца </string>
-    <string name="better_pizza2"> имеет лучшую ценность </string>
-    <string name="better_pizza3">% больше выгоды</string>
+    <string name="better_pizza1">Пицца </string>
+    <string name="better_pizza2"> на </string>
+    <string name="better_pizza3">% выгоднее</string>
     <string name="language">Язык</string>
     <string name="enter_size">Введите размер</string>
     <string name="enter_price">Введите цену</string>

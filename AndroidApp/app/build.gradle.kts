@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.howthe.pvc"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.howthe.pvc"
@@ -39,7 +39,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

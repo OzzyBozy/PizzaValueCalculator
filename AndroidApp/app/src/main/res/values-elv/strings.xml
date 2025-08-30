@@ -6,14 +6,14 @@
     <string name="price_b">Antaina B:</string>
     <string name="price_a">Antaina A:</string>
     <string name="pizzavaluecalculator">Pizza Nauva Nátien</string>
-    <string name="better_pizza1">Corma </string>
+    <string name="better_pizza1">Corma\u00A0</string>
     <string name="language">Lambë</string>
-    <string name="better_pizza2"> ná alya </string>
+    <string name="better_pizza2">\u00A0ná alya\u00A0</string>
     <string name="enter_size">Mittanya anta</string>
     <string name="enter_price">Mittanya antaina</string>
     <string name="dark_mode">Mornë Tyelë</string>
     <string name="equal_value">I atarwa cormar nauvar equë</string>
-    <string name="better_pizza3">% alya nauva</string>
+    <string name="better_pizza3">%\u00A0alya nauva</string>
     <string name="advanced_mode">Istyar Mólë</string>
     <string name="slices_left_A">Telperiën A:</string>
     <string name="slices_left_B">Telperiën B:</string>
