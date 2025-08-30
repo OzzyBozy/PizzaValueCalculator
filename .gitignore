@@ -20,3 +20,5 @@ google-services.json
 
 secrets.properties
 *.env
+/AndroidApp/.idea/caches/deviceStreaming.xml
+/AndroidApp/.idea/workspace.xml
