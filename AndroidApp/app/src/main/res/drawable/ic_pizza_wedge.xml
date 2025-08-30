@@ -7,5 +7,5 @@
         android:fillColor="?attr/pvcBackground"
         android:pathData="M50,50 L99.24,41.32 A50,50 0 0,1 99.24,58.68 Z"
         android:strokeColor="?attr/pvcBackground"
-        android:strokeWidth="0.5"/>
+        android:strokeWidth="0.7" />
 </vector>
