@@ -6,12 +6,15 @@
     <string name="price_b">Цена B:</string>
     <string name="price_a">Цена A:</string>
     <string name="pizzavaluecalculator">Калькулятор Ценности Пиццы</string>
-    <string name="better_pizza1">Пицца </string>
-    <string name="better_pizza2"> имеет лучшую ценность </string>
-    <string name="better_pizza3">% больше выгоды</string>
+    <string name="better_pizza1">Пицца </string>
+    <string name="better_pizza2"> на </string>
+    <string name="better_pizza3">% выгоднее</string>
     <string name="language">Язык</string>
     <string name="enter_size">Введите размер</string>
     <string name="enter_price">Введите цену</string>
     <string name="dark_mode">Тёмная тема</string>
     <string name="equal_value">Обe пиццы имеют одинаковую ценность</string>
+    <string name="advanced_mode">Расширенный режим</string>
+    <string name="slices_left_A">Оставшиеся куски A:</string>
+    <string name="slices_left_B">Оставшиеся куски B:</string>
 </resources>

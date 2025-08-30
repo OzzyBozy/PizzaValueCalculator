@@ -6,12 +6,15 @@
     <string name="price_b">价格 B：</string>
     <string name="price_a">价格 A：</string>
     <string name="pizzavaluecalculator">披萨价值计算器</string>
-    <string name="better_pizza1">披萨 </string>
-    <string name="better_pizza2"> 性价比更高 </string>
+    <string name="better_pizza1">披萨</string>
+    <string name="better_pizza2">的价值</string>
     <string name="better_pizza3">％更划算</string>
     <string name="language">语言</string>
     <string name="enter_size">输入尺寸</string>
     <string name="enter_price">输入价格</string>
     <string name="dark_mode">深色模式</string>
     <string name="equal_value">两种披萨价值相等</string>
+    <string name="advanced_mode">高级模式</string>
+    <string name="slices_left_A">剩余切片 A:</string>
+    <string name="slices_left_B">剩余切片 B:</string>
 </resources>

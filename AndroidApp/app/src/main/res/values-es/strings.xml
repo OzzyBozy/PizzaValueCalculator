@@ -6,12 +6,15 @@
     <string name="price_b">Precio B:</string>
     <string name="price_a">Precio A:</string>
     <string name="pizzavaluecalculator">Calculadora de Valor de Pizza</string>
-    <string name="better_pizza1">Pizza </string>
-    <string name="better_pizza2"> tiene un mejor valor </string>
-    <string name="better_pizza3">% mejor valor</string>
+    <string name="better_pizza1">Pizza </string>
+    <string name="better_pizza2"> es </string>
+    <string name="better_pizza3"> % mejor valor</string>
     <string name="language">Idioma</string>
     <string name="enter_size">Ingresar tamaño</string>
     <string name="enter_price">Ingresar precio</string>
     <string name="dark_mode">Modo oscuro</string>
     <string name="equal_value">Ambas pizzas tienen el mismo valor</string>
+    <string name="advanced_mode">Modo avanzado</string>
+    <string name="slices_left_A">Porciones A:</string>
+    <string name="slices_left_B">Porciones B:</string>
 </resources>

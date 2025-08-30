@@ -14,4 +14,7 @@
     <string name="better_pizza1">"Pizza "</string>
     <string name="better_pizza2">" %"</string>
     <string name="better_pizza3">" daha avantajlı"</string>
+    <string name="advanced_mode">Gelişmiş mod</string>
+    <string name="slices_left_A">Kalan dilim A:</string>
+    <string name="slices_left_B">Kalan dilim B:</string>
 </resources>

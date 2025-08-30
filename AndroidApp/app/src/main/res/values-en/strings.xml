@@ -11,7 +11,10 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="language">Language</string>
     <string name="equal_value">Both pizzas have equal value</string>
-    <string name="better_pizza1">"Pizza "</string>
-    <string name="better_pizza2">" is "</string>
-    <string name="better_pizza3">% better value</string>
+    <string name="better_pizza1">Pizza\u0020</string>
+    <string name="better_pizza2">\u0020is\u0020</string>
+    <string name="better_pizza3">%\u0020better value</string>
+    <string name="advanced_mode">Advanced mode</string>
+    <string name="slices_left_A">Slices left A:</string>
+    <string name="slices_left_B">Slices left B:</string>
 </resources>

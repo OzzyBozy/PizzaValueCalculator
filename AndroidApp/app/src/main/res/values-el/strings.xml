@@ -6,12 +6,15 @@
     <string name="price_b">Τιμή B:</string>
     <string name="price_a">Τιμή A:</string>
     <string name="pizzavaluecalculator">Υπολογιστής Αξίας Πίτσας</string>
-    <string name="better_pizza1">Η πίτσα</string>
-    <string name="better_pizza2">έχει καλύτερη αξία</string>
-    <string name="better_pizza3">% περισσότερη αξία</string>
+    <string name="better_pizza1">Η πίτσα\u0020</string>
+    <string name="better_pizza2">\u0020είναι\u0020</string>
+    <string name="better_pizza3">%\u0020καλύτερη αξία</string>
     <string name="language">Γλώσσα</string>
     <string name="enter_size">Εισάγετε μέγεθος</string>
     <string name="enter_price">Εισάγετε τιμή</string>
     <string name="dark_mode">Σκούρο θέμα</string>
     <string name="equal_value">Και οι δύο πίτσες έχουν την ίδια αξία</string>
+    <string name="advanced_mode">Προηγμένη λειτουργία</string>
+    <string name="slices_left_A">Εναπομείναντα κομμάτια Α:</string>
+    <string name="slices_left_B">Εναπομείναντα κομμάτια Β:</string>
 </resources>
