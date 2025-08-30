@@ -106,16 +106,16 @@ class MainActivity : AppCompatActivity() {
             advancedSettingsLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
             prefs.edit { putBoolean(ThemeUtils.KEY_ADVANCED_MODE, isChecked) }
             if (!isChecked) {
-                binding.sliceSeekBarA!!.progress = 17
-                updateSliceValueAndText(18, binding.sliceSeekBarAValue!!, true)
-                binding.sliceSeekBarB!!.progress = 17
-                updateSliceValueAndText(18, binding.sliceSeekBarBValue!!, false)
+                binding.sliceSeekBarA.progress = 17
+                updateSliceValueAndText(18, binding.sliceSeekBarAValue, true)
+                binding.sliceSeekBarB.progress = 17
+                updateSliceValueAndText(18, binding.sliceSeekBarBValue, false)
                 recalculate()
             }
         }
 
-        val sliceSeekBarA = binding.sliceSeekBarA!!
-        val sliceTextViewA = binding.sliceSeekBarAValue!!
+        val sliceSeekBarA = binding.sliceSeekBarA
+        val sliceTextViewA = binding.sliceSeekBarAValue
         sliceSeekBarA.max = 17
         val initialSliceAProgress = savedInstanceState?.getInt("sliceAProgress", 17) ?: 17
         sliceSeekBarA.progress = initialSliceAProgress
@@ -142,8 +142,8 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        val sliceSeekBarB = binding.sliceSeekBarB!!
-        val sliceTextViewB = binding.sliceSeekBarBValue!!
+        val sliceSeekBarB = binding.sliceSeekBarB
+        val sliceTextViewB = binding.sliceSeekBarBValue
         sliceSeekBarB.max = 17
         val initialSliceBProgress = savedInstanceState?.getInt("sliceBProgress", 17) ?: 17
         sliceSeekBarB.progress = initialSliceBProgress
@@ -194,6 +194,29 @@ class MainActivity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
+        val labels = listOf(
+            binding.labelSizeA,
+            binding.labelPriceA,
+            binding.labelSizeB,
+            binding.labelPriceB
+        )
+
+        binding.root.post {
+            var maxWidth = 0
+            labels.forEach { tv ->
+                tv.measure(
+                    View.MeasureSpec.UNSPECIFIED,
+                    View.MeasureSpec.UNSPECIFIED
+                )
+                val width = tv.measuredWidth
+                if (width > maxWidth) maxWidth = width
+            }
+            labels.forEach { tv ->
+                tv.layoutParams?.width = maxWidth
+                tv.requestLayout()
+            }
+        }
+
         val settingsLayout = binding.settingsMenu
         val settingsButton = binding.settingsButton
         val settingsExitButton = binding.settingsExitButton
@@ -294,8 +317,8 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("settingsMenuVisibility", binding.settingsMenu.visibility)
-        outState.putInt("sliceAProgress", binding.sliceSeekBarA!!.progress)
-        outState.putInt("sliceBProgress", binding.sliceSeekBarB!!.progress)
+        outState.putInt("sliceAProgress", binding.sliceSeekBarA.progress)
+        outState.putInt("sliceBProgress", binding.sliceSeekBarB.progress)
     }
 
     private fun updateSliceValueAndText(progress: Int, textView: TextView, isPizzaA: Boolean) {

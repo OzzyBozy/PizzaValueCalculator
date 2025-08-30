@@ -92,10 +92,10 @@
                             android:background="@drawable/textbox">
 
                             <TextView
+                                android:id="@+id/labelSizeA"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:width="80dp"
                                 android:text="@string/size_a"
                                 android:textColor="?attr/pvcText"
                                 android:textStyle="bold"
@@ -106,7 +106,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginHorizontal="8dp"
                                 android:hint="@string/enter_size"
                                 android:inputType="numberDecimal"
                                 android:textColor="?attr/pvcBoxText"/>
@@ -122,10 +122,10 @@
                             android:background="@drawable/textbox">
 
                             <TextView
+                                android:id="@+id/labelPriceA"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:width="80dp"
                                 android:text="@string/price_a"
                                 android:textColor="?attr/pvcText"
                                 android:textStyle="bold"
@@ -136,7 +136,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginHorizontal="8dp"
                                 android:hint="@string/enter_price"
                                 android:inputType="numberDecimal"
                                 android:textColor="?attr/pvcBoxText"/>
@@ -167,10 +167,10 @@
                             android:background="@drawable/textbox">
 
                             <TextView
+                                android:id="@+id/labelSizeB"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:width="80dp"
                                 android:text="@string/size_b"
                                 android:textColor="?attr/pvcText"
                                 android:textStyle="bold"
@@ -181,7 +181,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginHorizontal="8dp"
                                 android:hint="@string/enter_size"
                                 android:inputType="numberDecimal"
                                 android:textColor="?attr/pvcBoxText"/>
@@ -197,12 +197,12 @@
                             android:background="@drawable/textbox">
 
                             <TextView
+                                android:id="@+id/labelPriceB"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="?attr/pvcText"
                                 android:textStyle="bold"
                                 android:layout_marginStart="10dp"
-                                android:width="80dp"
                                 android:text="@string/price_b"
                                 android:textSize="16sp" />
 
@@ -211,7 +211,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
+                                android:layout_marginHorizontal="8dp"
                                 android:hint="@string/enter_price"
                                 android:inputType="numberDecimal"
                                 android:textColor="?attr/pvcBoxText"/>
@@ -369,14 +369,14 @@
                         android:textColor="?attr/pvcBoxText" />
 
                     <TextView
-                        android:id="@+id/seekValueA"
+                        android:id="@+id/sliceSeekBarAValue"
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:textColor="?attr/pvcBoxText"
                         android:paddingHorizontal="2dp"/>
 
                     <SeekBar
-                        android:id="@+id/sliceSeekA"
+                        android:id="@+id/sliceSeekBarA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:max="17"
@@ -401,14 +401,14 @@
                         android:textColor="?attr/pvcBoxText"/>
 
                     <TextView
-                        android:id="@+id/seekValueB"
+                        android:id="@+id/sliceSeekBarBValue"
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:textColor="?attr/pvcBoxText"
                         android:paddingHorizontal="2dp"/>
 
                     <SeekBar
-                        android:id="@+id/sliceSeekB"
+                        android:id="@+id/sliceSeekBarB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:max="17"
