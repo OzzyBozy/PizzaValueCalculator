@@ -27,6 +27,15 @@ import java.util.Locale
 import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
+import androidx.core.content.edit
+import android.content.Context
+import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import java.util.*
+import android.widget.SeekBar
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -105,6 +114,7 @@ class MainActivity : AppCompatActivity() {
         advancedSwitch.setOnCheckedChangeListener { _, isChecked ->
             advancedSettingsLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
             prefs.edit { putBoolean(ThemeUtils.KEY_ADVANCED_MODE, isChecked) }
+
             if (!isChecked) {
                 binding.sliceSeekBarA.progress = 17
                 updateSliceValueAndText(18, binding.sliceSeekBarAValue, true)
@@ -112,10 +122,6 @@ class MainActivity : AppCompatActivity() {
                 updateSliceValueAndText(18, binding.sliceSeekBarBValue, false)
                 recalculate()
             }
-        }
-
-        val sliceSeekBarA = binding.sliceSeekBarA
-        val sliceTextViewA = binding.sliceSeekBarAValue
         sliceSeekBarA.max = 17
         val initialSliceAProgress = savedInstanceState?.getInt("sliceAProgress", 17) ?: 17
         sliceSeekBarA.progress = initialSliceAProgress
@@ -137,13 +143,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-
-        val sliceSeekBarB = binding.sliceSeekBarB
-        val sliceTextViewB = binding.sliceSeekBarBValue
+            
         sliceSeekBarB.max = 17
         val initialSliceBProgress = savedInstanceState?.getInt("sliceBProgress", 17) ?: 17
         sliceSeekBarB.progress = initialSliceBProgress
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                     recalculate()
                 }
             }
-
+            
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -296,6 +296,7 @@ class MainActivity : AppCompatActivity() {
                         LocaleUtils.setLocale(this@MainActivity, selectedLangCode)
                         recreate()
                     }
+
                 }
 
                 override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
@@ -328,11 +329,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             sliceBValue = normalizedValue
         }
+
         val labelIndex = progress - 1
         if (labelIndex in seekBarLabels.indices) {
             textView.text = seekBarLabels[labelIndex]
         }
-
 
         val pizzaView = if (isPizzaA) binding.pizzaA else binding.pizzaB
         val overlayDrawable = pizzaView.foreground as? LayerDrawable
