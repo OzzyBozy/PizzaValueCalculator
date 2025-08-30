@@ -11,7 +11,7 @@
           android:pathData="M335.57,256.04C175.81,256.04 46.3,385.55 46.3,545.31C46.3,705.07 175.81,834.59 335.57,834.59C495.33,834.59 624.84,705.07 624.84,545.31C624.84,385.55 495.33,256.04 335.57,256.04ZM335.57,256.04"/>
       <path
           android:pathData="M46.3,256.04L624.84,256.04L624.84,834.59L46.3,834.59ZM46.3,256.04"
-          android:fillColor="@color/wood"
+          android:fillColor="?attr/pvcRedBanner"
           android:fillType="nonZero"
           android:strokeColor="#00000000" />
     </group>
@@ -53,7 +53,7 @@
             android:pathData="M599.96,23.07L656.5,55.34C668.01,61.92 672.02,76.57 665.45,88.09L358.77,625.33C352.2,636.84 337.55,640.85 326.04,634.28L269.5,602.01C257.99,595.43 253.98,580.78 260.55,569.27L567.22,32.02C573.79,20.51 588.45,16.5 599.96,23.07ZM599.96,23.07"/>
         <path
             android:pathData="M579.12,11.18L677.34,67.24L346.86,646.21L248.64,590.14ZM579.12,11.18"
-            android:fillColor="@color/wood"
+            android:fillColor="?attr/pvcRedBanner"
             android:fillType="nonZero"
             android:strokeColor="#00000000"/>
       </group>
@@ -67,7 +67,7 @@
           android:pathData="M335.57,320.11C211.2,320.11 110.37,420.94 110.37,545.31C110.37,669.69 211.2,770.52 335.57,770.52C459.95,770.52 560.77,669.69 560.77,545.31C560.77,420.94 459.95,320.11 335.57,320.11ZM335.57,320.11"/>
       <path
           android:pathData="M110.37,320.11L560.77,320.11L560.77,770.52L110.37,770.52ZM110.37,320.11"
-          android:fillColor="@color/wood"
+          android:fillColor="?attr/pvcRedBanner"
           android:fillType="nonZero"
           android:strokeColor="#00000000"/>
     </group>

@@ -11,20 +11,19 @@
 
         <LinearLayout
             android:id="@+id/rootLayout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/headerImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="-4dp"
+                android:layout_marginTop="-2dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:layout_marginStart="-2dp"
-                android:layout_marginEnd="-2dp"
-                android:layout_marginTop="-1dp"
                 android:contentDescription="@string/pizzavaluecalculator"
+                android:scaleType="fitXY"
                 android:src="@drawable/hheader" />
 
             <LinearLayout
@@ -37,8 +36,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/resultText"
@@ -53,27 +52,27 @@
                         android:id="@+id/settingsButton"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:contentDescription="@string/settings"
-                        android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
                         android:background="@null"
-                        app:srcCompat="@drawable/settings"/>
+                        android:contentDescription="@string/settings"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/settings" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/pizzaContainer"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:orientation="horizontal"
                     android:weightSum="2">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
+                        android:orientation="vertical"
                         android:paddingEnd="8dp">
 
                         <ImageView
@@ -82,14 +81,16 @@
                             android:layout_height="200dp"
                             android:src="@drawable/pizza_shape" />
 
-                        <Space android:layout_width="match_parent" android:layout_height="8dp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:background="@drawable/textbox"
                             android:gravity="center_vertical"
-                            android:background="@drawable/textbox">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/labelSizeA"
@@ -98,28 +99,30 @@
                                 android:layout_marginStart="10dp"
                                 android:text="@string/size_a"
                                 android:textColor="?attr/pvcText"
-                                android:textStyle="bold"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                             <EditText
                                 android:id="@+id/inputSizeA"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginHorizontal="8dp"
+                                android:layout_weight="1"
                                 android:hint="@string/enter_size"
                                 android:inputType="numberDecimal"
-                                android:textColor="?attr/pvcBoxText"/>
+                                android:textColor="?attr/pvcBoxText" />
                         </LinearLayout>
 
-                        <Space android:layout_width="match_parent" android:layout_height="6dp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:background="@drawable/textbox"
                             android:gravity="center_vertical"
-                            android:background="@drawable/textbox">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/labelPriceA"
@@ -128,27 +131,27 @@
                                 android:layout_marginStart="10dp"
                                 android:text="@string/price_a"
                                 android:textColor="?attr/pvcText"
-                                android:textStyle="bold"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                             <EditText
                                 android:id="@+id/inputPriceA"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginHorizontal="8dp"
+                                android:layout_weight="1"
                                 android:hint="@string/enter_price"
                                 android:inputType="numberDecimal"
-                                android:textColor="?attr/pvcBoxText"/>
+                                android:textColor="?attr/pvcBoxText" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
+                        android:orientation="vertical"
                         android:paddingEnd="16dp">
 
                         <ImageView
@@ -157,14 +160,16 @@
                             android:layout_height="200dp"
                             android:src="@drawable/pizza_shape" />
 
-                        <Space android:layout_width="match_parent" android:layout_height="8dp" />
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:background="@drawable/textbox"
                             android:gravity="center_vertical"
-                            android:background="@drawable/textbox">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/labelSizeB"
@@ -173,48 +178,50 @@
                                 android:layout_marginStart="10dp"
                                 android:text="@string/size_b"
                                 android:textColor="?attr/pvcText"
-                                android:textStyle="bold"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                             <EditText
                                 android:id="@+id/inputSizeB"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginHorizontal="8dp"
+                                android:layout_weight="1"
                                 android:hint="@string/enter_size"
                                 android:inputType="numberDecimal"
-                                android:textColor="?attr/pvcBoxText"/>
+                                android:textColor="?attr/pvcBoxText" />
                         </LinearLayout>
 
-                        <Space android:layout_width="match_parent" android:layout_height="6dp"/>
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:background="@drawable/textbox"
                             android:gravity="center_vertical"
-                            android:background="@drawable/textbox">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/labelPriceB"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="?attr/pvcText"
-                                android:textStyle="bold"
                                 android:layout_marginStart="10dp"
                                 android:text="@string/price_b"
-                                android:textSize="16sp" />
+                                android:textColor="?attr/pvcText"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
 
                             <EditText
                                 android:id="@+id/inputPriceB"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginHorizontal="8dp"
+                                android:layout_weight="1"
                                 android:hint="@string/enter_price"
                                 android:inputType="numberDecimal"
-                                android:textColor="?attr/pvcBoxText"/>
+                                android:textColor="?attr/pvcBoxText" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -223,16 +230,16 @@
     </ScrollView>
 
     <ScrollView
+        android:id="@+id/settingsMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/textbox"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="96dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:visibility="gone"
-        android:id="@+id/settingsMenu">
+        android:background="@drawable/textbox"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -248,35 +255,35 @@
                     android:id="@+id/settingsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:text="@string/settings"
                     android:textAlignment="center"
                     android:textColor="?attr/pvcBoxText"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:layout_centerHorizontal="true"/>
+                    android:textStyle="bold" />
 
                 <ImageButton
                     android:id="@+id/settingsExitButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
                     android:layout_alignParentEnd="true"
+                    android:adjustViewBounds="true"
                     android:background="@null"
-                    app:srcCompat="@drawable/settingsexit"/>
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/settingsexit" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:background="?attr/pvcBoxBorder"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:background="?attr/pvcBoxBorder" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingBottom="4dp">
 
                 <TextView
@@ -285,22 +292,22 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/dark_mode"
-                    android:textSize="16sp"
-                    android:textColor="?attr/pvcBoxText" />
+                    android:textColor="?attr/pvcBoxText"
+                    android:textSize="16sp" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/darkModeSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:thumbTint="?attr/pvcBoxBorder"
-                    app:trackTint="?attr/pvcBackground" />
+                    app:thumbTint="?attr/pvcRedBanner"
+                    app:trackTint="?attr/pvcWhiteBanner" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingBottom="4dp">
 
                 <TextView
@@ -309,24 +316,25 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/language"
-                    android:textSize="16sp"
-                    android:textColor="?attr/pvcBoxText" />
+                    android:textColor="?attr/pvcBoxText"
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/languageSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:popupBackground="?attr/pvcBackground"
                     android:background="@drawable/textbox"
                     android:paddingVertical="4dp"
                     android:paddingStart="2dp"
-                    android:spinnerMode="dropdown"/>
+                    android:popupBackground="?attr/pvcBackground"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingBottom="4dp">
 
                 <TextView
@@ -335,29 +343,30 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/advanced_mode"
-                    android:textSize="16sp"
-                    android:textColor="?attr/pvcBoxText" />
+                    android:textColor="?attr/pvcBoxText"
+                    android:textSize="16sp" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/advancedSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:thumbTint="?attr/pvcBoxBorder"
-                    app:trackTint="?attr/pvcBackground" />
+                    app:thumbTint="?attr/pvcRedBanner"
+                    app:trackTint="?attr/pvcWhiteBanner" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/advancedSettingsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center_vertical"
-                android:id="@+id/advancedSettingsLayout"
+                android:orientation="vertical"
                 android:visibility="gone">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:paddingBottom="4dp">
 
                     <TextView
@@ -365,15 +374,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/slices_left_A"
-                        android:textSize="16sp"
-                        android:textColor="?attr/pvcBoxText" />
+                        android:textColor="?attr/pvcBoxText"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/sliceSeekBarAValue"
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/pvcBoxText"
-                        android:paddingHorizontal="2dp"/>
+                        android:paddingHorizontal="2dp"
+                        android:textColor="?attr/pvcBoxText" />
 
                     <SeekBar
                         android:id="@+id/sliceSeekBarA"
@@ -381,15 +390,15 @@
                         android:layout_height="wrap_content"
                         android:max="17"
                         android:progress="17"
-                        android:thumbTint="?attr/pvcBoxBorder"
-                        android:progressTint="?attr/pvcBackground"/>
+                        android:progressTint="?attr/pvcWhiteBanner"
+                        android:thumbTint="?attr/pvcRedBanner" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:paddingBottom="4dp">
 
                     <TextView
@@ -397,15 +406,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/slices_left_B"
-                        android:textSize="16sp"
-                        android:textColor="?attr/pvcBoxText"/>
+                        android:textColor="?attr/pvcBoxText"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/sliceSeekBarBValue"
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/pvcBoxText"
-                        android:paddingHorizontal="2dp"/>
+                        android:paddingHorizontal="2dp"
+                        android:textColor="?attr/pvcBoxText" />
 
                     <SeekBar
                         android:id="@+id/sliceSeekBarB"
@@ -413,8 +422,8 @@
                         android:layout_height="wrap_content"
                         android:max="17"
                         android:progress="17"
-                        android:thumbTint="?attr/pvcBoxBorder"
-                        android:progressTint="?attr/pvcBackground"/>
+                        android:progressTint="?attr/pvcWhiteBanner"
+                        android:thumbTint="?attr/pvcRedBanner" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
