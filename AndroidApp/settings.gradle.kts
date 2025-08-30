@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PVC"
+rootProject.name = "AndroidApp"
 include(":app")
  
