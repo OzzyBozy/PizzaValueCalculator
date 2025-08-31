@@ -27,15 +27,6 @@ import java.util.Locale
 import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
-import androidx.core.content.edit
-import android.content.Context
-import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
-import java.util.*
-import android.widget.SeekBar
-import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private var isUpdatingProgrammatically = false
     private var sliceAValue: Double = 1.0
     private var sliceBValue: Double = 1.0
+    private var areAchievementsEnabled = false
 
     private val seekBarLabels = listOf(
         "1/18",
@@ -114,19 +106,43 @@ class MainActivity : AppCompatActivity() {
         advancedSwitch.setOnCheckedChangeListener { _, isChecked ->
             advancedSettingsLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
             prefs.edit { putBoolean(ThemeUtils.KEY_ADVANCED_MODE, isChecked) }
-
             if (!isChecked) {
                 binding.sliceSeekBarA.progress = 17
                 updateSliceValueAndText(18, binding.sliceSeekBarAValue, true)
                 binding.sliceSeekBarB.progress = 17
                 updateSliceValueAndText(18, binding.sliceSeekBarBValue, false)
                 recalculate()
+                if (binding.achievementSwitch.isChecked) {
+                    binding.achievementSwitch.isChecked = false
+                }
             }
+        }
+
+        val achievementSwitch = binding.achievementSwitch
+        areAchievementsEnabled = prefs.getBoolean(ThemeUtils.KEY_ACHIEVEMENTS_ENABLED, false)
+        achievementSwitch.isChecked = areAchievementsEnabled
+        if (areAchievementsEnabled) {
+            val achievements = Achievements.getInstance()
+            listOf("customer1", "customer2", "customer3", "customer4", "customer5").forEach {
+                achievements.increment(this, it)
+            }
+        }
+
+        achievementSwitch.setOnCheckedChangeListener { _, isChecked ->
+            areAchievementsEnabled = isChecked
+            prefs.edit { putBoolean(ThemeUtils.KEY_ACHIEVEMENTS_ENABLED, isChecked) }
+            if (isChecked) {
+                val achievements = Achievements.getInstance()
+                achievements.unlock(this, "enable_achievements")
+            }
+        }
+
+        val sliceSeekBarA = binding.sliceSeekBarA
+        val sliceTextViewA = binding.sliceSeekBarAValue
         sliceSeekBarA.max = 17
         val initialSliceAProgress = savedInstanceState?.getInt("sliceAProgress", 17) ?: 17
         sliceSeekBarA.progress = initialSliceAProgress
         updateSliceValueAndText(initialSliceAProgress + 1, sliceTextViewA, true)
-
 
         sliceSeekBarA.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(
@@ -140,10 +156,21 @@ class MainActivity : AppCompatActivity() {
                     if (binding.inputSizeA.text.isNotBlank() && binding.inputSizeB.text.isNotBlank()) {
                         recalculate()
                     }
-
+                    if (areAchievementsEnabled) {
+                        val achievements = Achievements.getInstance()
+                        listOf("slicer1", "slicer2", "slicer3", "slicer4").forEach {
+                            achievements.increment(this@MainActivity, it)
+                        }
+                    }
                 }
             }
-            
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        val sliceSeekBarB = binding.sliceSeekBarB
+        val sliceTextViewB = binding.sliceSeekBarBValue
         sliceSeekBarB.max = 17
         val initialSliceBProgress = savedInstanceState?.getInt("sliceBProgress", 17) ?: 17
         sliceSeekBarB.progress = initialSliceBProgress
@@ -161,7 +188,7 @@ class MainActivity : AppCompatActivity() {
                     recalculate()
                 }
             }
-            
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -234,6 +261,9 @@ class MainActivity : AppCompatActivity() {
                 ThemeUtils.THEME_LIGHT
             }
             prefs.edit { putString(ThemeUtils.KEY_THEME, newThemePreference) }
+            if (areAchievementsEnabled) {
+                Achievements.getInstance().unlock(this, "darkmode")
+            }
             ThemeUtils.applyThemeChangeAndRecreate(this)
         }
 
@@ -294,9 +324,11 @@ class MainActivity : AppCompatActivity() {
                     if (selectedLangCode != savedLang) {
                         langPrefs.edit { putString("app_language", selectedLangCode) }
                         LocaleUtils.setLocale(this@MainActivity, selectedLangCode)
+                        if (areAchievementsEnabled) {
+                            Achievements.getInstance().unlock(this@MainActivity, "multilingual")
+                        }
                         recreate()
                     }
-
                 }
 
                 override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
@@ -329,11 +361,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             sliceBValue = normalizedValue
         }
-
         val labelIndex = progress - 1
         if (labelIndex in seekBarLabels.indices) {
             textView.text = seekBarLabels[labelIndex]
         }
+
 
         val pizzaView = if (isPizzaA) binding.pizzaA else binding.pizzaB
         val overlayDrawable = pizzaView.foreground as? LayerDrawable
@@ -381,6 +413,9 @@ class MainActivity : AppCompatActivity() {
             val epsilon = 0.0001
             val diff = valueA - valueB
             binding.resultText.text = if (kotlin.math.abs(diff) < epsilon) {
+                if (areAchievementsEnabled) {
+                    Achievements.getInstance().unlock(this, "balanced")
+                }
                 getString(R.string.equal_value)
             } else {
                 val better = if (diff < 0) "A" else "B"
@@ -391,6 +426,14 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.better_pizza1) + better + getString(R.string.better_pizza2) + "%.2f".format(
                     percent
                 ) + getString(R.string.better_pizza3)
+            }
+            if (areAchievementsEnabled) {
+                if (valueA.isInfinite() || valueB.isInfinite()) {
+                    Achievements.getInstance().unlock(this, "infinity")
+                }
+                if ((valueA == 0.0) || (valueB == 0.0)) {
+                    Achievements.getInstance().unlock(this, "zero")
+                }
             }
         } else {
             binding.resultText.text = ""
@@ -550,6 +593,7 @@ class MainActivity : AppCompatActivity() {
         const val PREFS_NAME = "pvc_settings"
         const val KEY_THEME = "theme_preference"
         const val KEY_ADVANCED_MODE = "advanced_mode_preference"
+        const val KEY_ACHIEVEMENTS_ENABLED = "achievements_enabled_preference"
 
         const val THEME_SYSTEM = "default"
         const val THEME_LIGHT = "light"
@@ -585,7 +629,7 @@ object LocaleUtils {
     private const val PREFS_NAME = "pvc_settings"
 
     fun setLocale(context: Context, language: String): Context {
-        val locale = Locale(language)
+        val locale = Locale.forLanguageTag(language)
         Locale.setDefault(locale)
 
         val config = Configuration(context.resources.configuration)
