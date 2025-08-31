@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Toast
 import android.widget.TextView
+import android.widget.ImageView
 import androidx.core.content.edit
 
 data class Achievement(
@@ -117,7 +118,7 @@ class Achievements private constructor() {
         if (!ach.unlocked) {
             ach.unlocked = true
             save(appContext, ach)
-            showToast(appContext, "Achievement Unlocked: ${ach.title}")
+            showToast(appContext, ach)
         }
     }
 
@@ -148,12 +149,26 @@ class Achievements private constructor() {
         }
     }
 
-    private fun showToast(context: Context, message: String) {
+    private fun showToast(context: Context, achievement: Achievement) {
         val inflater = LayoutInflater.from(context)
         val layout = inflater.inflate(R.layout.toast, null)
 
         val textView = layout.findViewById<TextView>(R.id.toast_message)
-        textView.text = message
+        textView.text = "Achievement Unlocked:\n${achievement.title}"
+
+        val iconView = layout.findViewById<ImageView>(R.id.toast_icon)
+        val iconName = "ach_${achievement.id}_pizza"
+        var iconResId = context.resources.getIdentifier(iconName, "drawable", context.packageName)
+        if (iconResId == 0) {
+            iconResId = context.resources.getIdentifier(
+                "ach_default_pizza",
+                "drawable",
+                context.packageName
+            )
+        }
+        if (iconResId != 0) {
+            iconView.setImageResource(iconResId)
+        }
 
         val toast = Toast(context).apply {
             duration = Toast.LENGTH_LONG
