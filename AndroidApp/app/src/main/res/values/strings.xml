@@ -18,4 +18,5 @@
     <string name="advanced_mode">Advanced mode</string>
     <string name="slices_left_A">Slices left A:</string>
     <string name="slices_left_B">Slices left B:</string>
+    <string name="achievement_toggle">Achievements</string>
 </resources>
