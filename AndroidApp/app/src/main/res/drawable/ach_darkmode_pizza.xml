@@ -1,0 +1,108 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Main moon body -->
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="64dp"
+                android:height="64dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <!-- Subtle shading (bottom-right darker circle) -->
+    <item
+        android:gravity="bottom|end"
+        android:right="4dp"
+        android:bottom="4dp">
+        <shape android:shape="oval">
+            <size
+                android:width="56dp"
+                android:height="56dp" />
+            <solid android:color="#B0BEC5" />
+        </shape>
+    </item>
+
+    <!-- Craters (dark gray spots) -->
+    <item
+        android:gravity="top|left"
+        android:left="8dp"
+        android:top="10dp">
+        <shape android:shape="oval">
+            <size
+                android:width="12dp"
+                android:height="12dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center_vertical|right"
+        android:right="12dp">
+        <shape android:shape="oval">
+            <size
+                android:width="10dp"
+                android:height="10dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center_vertical|left"
+        android:left="14dp"
+        android:top="19dp">
+        <shape android:shape="oval">
+            <size
+                android:width="8dp"
+                android:height="8dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center"
+        android:top="6dp">
+        <shape android:shape="oval">
+            <size
+                android:width="6dp"
+                android:height="6dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center"
+        android:bottom="8dp"
+        android:right="10dp">
+        <shape android:shape="oval">
+            <size
+                android:width="9dp"
+                android:height="9dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center"
+        android:left="10dp"
+        android:top="39dp">
+        <shape android:shape="oval">
+            <size
+                android:width="7dp"
+                android:height="7dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="top|end"
+        android:top="12dp"
+        android:right="14dp">
+        <shape android:shape="oval">
+            <size
+                android:width="6dp"
+                android:height="6dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+</layer-list>

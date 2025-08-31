@@ -63,7 +63,11 @@ class Achievements private constructor() {
                         "Mr. Worldwide",
                         "Make your app speak another language"
                     ),
-                    Achievement("darkmode", "Shade Master", "Toggle between dark and light mode"),
+                    Achievement(
+                        "darkmode",
+                        "Shade Master",
+                        "Toggle between dark and light mode"
+                    ),
                     Achievement(
                         "balanced",
                         "Perfectly Balanced",
@@ -151,7 +155,7 @@ class Achievements private constructor() {
 
     private fun showToast(context: Context, achievement: Achievement) {
         val inflater = LayoutInflater.from(context)
-        val layout = inflater.inflate(R.layout.toast, null)
+        val layout = inflater.inflate(R.layout.toast, null, false)
 
         val textView = layout.findViewById<TextView>(R.id.toast_message)
         textView.text = "Achievement Unlocked:\n${achievement.title}"
