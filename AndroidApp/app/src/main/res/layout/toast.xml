@@ -10,7 +10,7 @@
         android:id="@+id/toast_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ach_default_pizza"
         android:layout_marginEnd="8dp" />
 
     <TextView
