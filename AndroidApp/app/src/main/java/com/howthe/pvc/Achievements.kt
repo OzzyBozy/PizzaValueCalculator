@@ -180,7 +180,27 @@ class Achievements private constructor() {
             setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 100)
         }
 
+        layout.translationY = -layout.height.toFloat() - 100f
+        layout.alpha = 0f
+
+        layout.animate()
+            .translationY(0f)
+            .alpha(1f)
+            .setDuration(400)
+            .start()
+
         toast.show()
+
+        layout.postDelayed({
+            layout.animate()
+                .translationY(-layout.height.toFloat() - 100f)
+                .alpha(0f)
+                .setDuration(400)
+                .withEndAction {
+                    toast.cancel()
+                }
+                .start()
+        }, 2000)
     }
 
 

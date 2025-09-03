@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity() {
         "18/18"
     )
 
+    companion object {
+        private var hasCountedLaunch = false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeUtils.initializeDayNightMode(this)
 
@@ -121,10 +125,13 @@ class MainActivity : AppCompatActivity() {
         val achievementSwitch = binding.achievementSwitch
         areAchievementsEnabled = prefs.getBoolean(ThemeUtils.KEY_ACHIEVEMENTS_ENABLED, false)
         achievementSwitch.isChecked = areAchievementsEnabled
-        if (areAchievementsEnabled) {
-            val achievements = Achievements.getInstance()
-            listOf("customer1", "customer2", "customer3", "customer4", "customer5").forEach {
-                achievements.increment(this, it)
+        if (!hasCountedLaunch) {
+            hasCountedLaunch = true
+            if (areAchievementsEnabled) {
+                val achievements = Achievements.getInstance()
+                listOf("customer1", "customer2", "customer3", "customer4", "customer5").forEach {
+                    achievements.increment(this, it)
+                }
             }
         }
 
