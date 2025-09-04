@@ -7,6 +7,12 @@ import android.widget.Toast
 import android.widget.TextView
 import android.widget.ImageView
 import androidx.core.content.edit
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.recyclerview.widget.RecyclerView
 
 data class Achievement(
     val id: String,
@@ -217,4 +223,57 @@ class Achievements private constructor() {
             }
         }
     }
+}
+
+class AchievementsAdapter(
+    private val context: Context,
+    private val achievements: List<Achievement>
+) : RecyclerView.Adapter<AchievementsAdapter.AchievementViewHolder>() {
+
+    class AchievementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val icon: ImageView = itemView.findViewById(R.id.achievementIcon)
+        val title: TextView = itemView.findViewById(R.id.achievementTitle)
+        val description: TextView = itemView.findViewById(R.id.achievementDescription)
+        val progressBar: ProgressBar = itemView.findViewById(R.id.achievementProgress)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.achievement_item, parent, false)
+        return AchievementViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: AchievementViewHolder, position: Int) {
+        val ach = achievements[position]
+        holder.title.text = ach.title
+        holder.description.text = ach.description
+
+        val iconName = "ach_${ach.id}_pizza"
+        var iconResId = context.resources.getIdentifier(iconName, "drawable", context.packageName)
+        if (iconResId == 0) iconResId = R.drawable.ach_default_pizza
+        holder.icon.setImageResource(iconResId)
+
+        if (ach.unlocked) {
+            holder.icon.clearColorFilter()
+            holder.icon.alpha = 1f
+            holder.title.alpha = 1f
+            holder.description.alpha = 0.9f
+        } else {
+            val matrix = ColorMatrix().apply { setSaturation(0f) }
+            holder.icon.colorFilter = ColorMatrixColorFilter(matrix)
+            holder.icon.alpha = 0.55f
+            holder.title.alpha = 0.6f
+            holder.description.alpha = 0.5f
+        }
+
+        if (ach.target > 1) {
+            holder.progressBar.visibility = View.VISIBLE
+            val percent = ((ach.progress.toFloat() / ach.target) * 100).toInt()
+            holder.progressBar.progress = percent
+        } else {
+            holder.progressBar.visibility = View.GONE
+        }
+    }
+
+    override fun getItemCount(): Int = achievements.size
 }

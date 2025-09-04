@@ -22,6 +22,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.howthe.pvc.databinding.ActivityMainBinding
 import java.util.Locale
 import kotlin.math.PI
@@ -340,6 +342,11 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onNothingSelected(parent: android.widget.AdapterView<*>) {}
             }
+        val achievementsList = Achievements.getInstance().getAll(this)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.achievementsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = AchievementsAdapter(this, achievementsList)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

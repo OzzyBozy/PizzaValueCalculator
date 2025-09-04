@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/achievementIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ach_default_pizza"
+        android:contentDescription="@string/app_name"
+        android:layout_marginEnd="12dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/achievementTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement Title"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/achievementDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achievement description"
+            android:textSize="14sp"
+            android:alpha="0.8"
+            android:layout_marginTop="2dp" />
+
+        <ProgressBar
+            android:id="@+id/achievementProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="6dp"
+            android:progress="0"
+            android:max="100"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>
