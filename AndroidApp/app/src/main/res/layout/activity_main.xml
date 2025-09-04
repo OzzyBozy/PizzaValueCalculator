@@ -452,6 +452,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/achievementsLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -459,7 +460,10 @@
         android:layout_marginTop="96dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/textbox">
+        android:padding="16dp"
+        android:background="@drawable/textbox"
+        android:visibility="visible">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -487,8 +491,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginVertical="8dp"
+            android:layout_height="4dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
             android:background="?attr/pvcBoxBorder" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -500,5 +505,4 @@
             android:paddingBottom="4dp"
             android:layout_marginBottom="4dp" />
     </LinearLayout>
-
 </FrameLayout>

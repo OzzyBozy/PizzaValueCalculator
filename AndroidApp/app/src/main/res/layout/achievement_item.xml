@@ -26,7 +26,8 @@
             android:layout_height="wrap_content"
             android:text="Achievement Title"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="?attr/pvcText" />
 
         <TextView
             android:id="@+id/achievementDescription"
@@ -35,6 +36,7 @@
             android:text="Achievement description"
             android:textSize="14sp"
             android:alpha="0.8"
+            android:textColor="?attr/pvcText"
             android:layout_marginTop="2dp" />
 
         <ProgressBar
