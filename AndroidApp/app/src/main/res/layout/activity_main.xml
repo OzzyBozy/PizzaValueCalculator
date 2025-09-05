@@ -236,6 +236,7 @@
         android:layout_marginTop="96dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:paddingBottom="4dp"
         android:background="@drawable/textbox"
         android:orientation="vertical"
         android:visibility="gone">

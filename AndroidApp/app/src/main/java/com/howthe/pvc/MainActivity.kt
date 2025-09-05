@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.settingsMenu.visibility = View.GONE
         }
-        binding.achievementsLayout?.visibility = View.GONE
+        binding.achievementsLayout.visibility = View.GONE
 
         val prefs = getSharedPreferences(ThemeUtils.PREFS_NAME, MODE_PRIVATE)
         val currentTheme = prefs.getString(ThemeUtils.KEY_THEME, ThemeUtils.THEME_SYSTEM)
@@ -267,12 +267,12 @@ class MainActivity : AppCompatActivity() {
         val achievementLayout = binding.achievementsLayout
         val achievementButton = binding.achievementButton
         val achievementExitButton = binding.achievementsExitButton
-        achievementButton?.setOnClickListener {
-            achievementLayout?.visibility = View.VISIBLE
+        achievementButton.setOnClickListener {
+            achievementLayout.visibility = View.VISIBLE
             settingsLayout.visibility = View.GONE
         }
-        achievementExitButton?.setOnClickListener {
-            achievementLayout?.visibility = View.GONE
+        achievementExitButton.setOnClickListener {
+            achievementLayout.visibility = View.GONE
             settingsLayout.visibility = View.VISIBLE
         }
 
@@ -365,8 +365,8 @@ class MainActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 if (binding.settingsMenu.isVisible) {
                     binding.settingsMenu.isGone = true
-                } else if (binding.achievementsLayout!!.isVisible) {
-                    binding.achievementsLayout!!.isGone = true
+                } else if (binding.achievementsLayout.isVisible) {
+                    binding.achievementsLayout.isGone = true
                     binding.settingsMenu.isVisible = true
                 } else {
                     isEnabled = false
