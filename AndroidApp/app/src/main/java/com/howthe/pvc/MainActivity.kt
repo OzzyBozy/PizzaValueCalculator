@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.settingsMenu.visibility = View.GONE
         }
+        binding.achievementsLayout?.visibility = View.GONE
 
         val prefs = getSharedPreferences(ThemeUtils.PREFS_NAME, MODE_PRIVATE)
         val currentTheme = prefs.getString(ThemeUtils.KEY_THEME, ThemeUtils.THEME_SYSTEM)
