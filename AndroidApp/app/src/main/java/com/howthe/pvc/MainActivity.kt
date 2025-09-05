@@ -263,6 +263,18 @@ class MainActivity : AppCompatActivity() {
             settingsLayout.visibility = View.GONE
         }
 
+        val achievementLayout = binding.achievementsLayout
+        val achievementButton = binding.achievementButton
+        val achievementExitButton = binding.achievementsExitButton
+        achievementButton?.setOnClickListener {
+            achievementLayout?.visibility = View.VISIBLE
+            settingsLayout.visibility = View.GONE
+        }
+        achievementExitButton?.setOnClickListener {
+            achievementLayout?.visibility = View.GONE
+            settingsLayout.visibility = View.VISIBLE
+        }
+
         darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
             val newThemePreference = if (isChecked) {
                 ThemeUtils.THEME_DARK
@@ -352,6 +364,9 @@ class MainActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 if (binding.settingsMenu.isVisible) {
                     binding.settingsMenu.isGone = true
+                } else if (binding.achievementsLayout!!.isVisible) {
+                    binding.achievementsLayout!!.isGone = true
+                    binding.settingsMenu.isVisible = true
                 } else {
                     isEnabled = false
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()

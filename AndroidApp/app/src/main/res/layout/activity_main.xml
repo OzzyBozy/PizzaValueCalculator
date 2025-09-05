@@ -432,13 +432,18 @@
                     android:orientation="horizontal"
                     android:paddingBottom="4dp">
 
-                    <TextView
+                    <Button
+                        android:id="@+id/achievementButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:background="@drawable/textbox"
+                        android:paddingHorizontal="8dp"
+                        android:text="Achievements" />
+
+                    <View
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/achievement_toggle"
-                        android:textColor="?attr/pvcBoxText"
-                        android:textSize="16sp" />
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/achievementSwitch"
@@ -447,6 +452,8 @@
                         app:thumbTint="?attr/pvcRedBanner"
                         app:trackTint="?attr/pvcWhiteBanner" />
                 </LinearLayout>
+
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -460,7 +467,9 @@
         android:layout_marginTop="96dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:padding="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="4dp"
         android:background="@drawable/textbox"
         android:visibility="visible">
 
@@ -501,8 +510,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingBottom="4dp"
-            android:layout_marginBottom="4dp" />
+            android:clipToPadding="false" />
     </LinearLayout>
 </FrameLayout>
