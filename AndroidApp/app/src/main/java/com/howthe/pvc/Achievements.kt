@@ -82,7 +82,7 @@ class Achievements private constructor() {
                     Achievement(
                         "customer1",
                         "Customer I: Welcome",
-                        "Welcome aboard! Opened the app for the first time",
+                        "Welcome aboard! Reopened the app for the first time",
                         target = 1
                     ),
                     Achievement(
@@ -206,7 +206,7 @@ class Achievements private constructor() {
                     toast.cancel()
                 }
                 .start()
-        }, 2000)
+        }, 3000)
     }
 
 
@@ -267,9 +267,13 @@ class AchievementsAdapter(
         }
 
         if (ach.target > 1) {
-            holder.progressBar.visibility = View.VISIBLE
             val percent = ((ach.progress.toFloat() / ach.target) * 100).toInt()
-            holder.progressBar.progress = percent
+            if (percent != 100) {
+                holder.progressBar.visibility = View.VISIBLE
+                holder.progressBar.progress = percent
+            } else {
+                holder.progressBar.visibility = View.GONE
+            }
         } else {
             holder.progressBar.visibility = View.GONE
         }
